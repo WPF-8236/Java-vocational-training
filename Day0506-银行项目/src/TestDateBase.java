@@ -1,7 +1,3 @@
-package com.WPF.BankingPprojects;
-
-import java.util.Scanner;
-
 public class TestDateBase {
 	public static void main(String[] args) {
 		DateBase dateBase = new DateBase(); //初始化数据库

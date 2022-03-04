@@ -1,5 +1,3 @@
-package com.WPF.BankingPprojects;
-
 import java.util.Scanner;
 
 /**

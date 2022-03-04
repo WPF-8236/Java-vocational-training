@@ -1,5 +1,3 @@
-package com.WPF.BankingPprojects;
-
 public class User {
 	private String u_id;
 	private String u_password;

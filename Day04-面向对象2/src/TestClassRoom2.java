@@ -1,5 +1,3 @@
-package com.skeyedu.day04obj;
-
 public class TestClassRoom2 {
 
 	public static void main(String[] args) {

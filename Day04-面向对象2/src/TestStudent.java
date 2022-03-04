@@ -1,5 +1,3 @@
-package com.skeyedu.day04obj;
-
 public class TestStudent extends Student{
 	
 	public static void test() {

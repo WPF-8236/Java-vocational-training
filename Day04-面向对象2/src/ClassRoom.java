@@ -1,4 +1,3 @@
-package com.skeyedu.day04obj;
 /*
  
 设计一个教室类（Class_room )（要封装属性）

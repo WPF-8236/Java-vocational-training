@@ -1,5 +1,3 @@
-package com.skeyedu.day04obj;
-
 public class TestHuman {
 	// 初始化的顺序
 	/*

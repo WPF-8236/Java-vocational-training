@@ -1,5 +1,3 @@
-package com.skeyedu.day04obj;
-
 public class Car {
 	private String brand;
 	private int seats;

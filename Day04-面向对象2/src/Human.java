@@ -1,5 +1,3 @@
-package com.skeyedu.day04obj;
-
 public class Human {
 	
 	private String name;

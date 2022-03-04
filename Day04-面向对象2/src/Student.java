@@ -1,4 +1,3 @@
-package com.skeyedu.day04obj;
 // static 关键字:
 public class Student {
 	// 学生的属性

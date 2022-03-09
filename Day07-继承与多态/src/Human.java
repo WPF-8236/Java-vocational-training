@@ -7,6 +7,11 @@ public class Human {
 	public Human() {
 	}
 
+	public Human(String name, Integer age) {
+		this.name = name;
+		this.age = age;
+	}
+
 	public Human(String id, String name, Integer age, String gender) {
 		this.id = id;
 		this.name = name;
@@ -64,5 +69,17 @@ public class Human {
 				", age=" + age +
 				", gender='" + gender + '\'' +
 				'}';
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj instanceof Human) {
+			Human human = (Human) obj;
+			if (this.name.equals(human.name) && this.age == human.age)
+				return true;
+		}
+		return false;
 	}
 }

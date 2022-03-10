@@ -3,10 +3,15 @@ package homework.test03;
 import java.util.Date;
 
 public class Student {
-	public Date graduationTime;
+	protected String name;
+	protected String time;
 
 	public Student() {
-		graduationTime = new Date();
+		time = TimeUtil.getTime("yyyy-MM-dd");
+	}
+
+	public void seeTime() {
+		System.out.println(time);
 	}
 
 }

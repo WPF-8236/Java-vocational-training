@@ -1,3 +1,5 @@
+package 异常类;
+
 import java.io.IOException;
 import java.util.InputMismatchException;
 

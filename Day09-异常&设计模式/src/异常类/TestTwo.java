@@ -1,3 +1,5 @@
+package 异常类;
+
 import java.io.IOException;
 import java.util.Locale;
 
@@ -16,7 +18,7 @@ public class TestTwo {
 	public static void checkStr(String str) throws MyException/*声明异常，告诉本方法的调用者，我这个方法是有异常的*/ {
 		if (str.toLowerCase(Locale.ROOT).contains("sb"))
 			//抛出异常
-//			throw new MyException();
+//			throw new 异常类.MyException();
 			throw new MyException("我们应该文明用语");
 	}
 

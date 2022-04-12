@@ -11,8 +11,8 @@ import java.util.List;
 public class ProviderDaoImpl extends BaseDao implements ProviderDao {
 	@Override
 	public int insertProvider(JDBC jdbc, Provider provider) throws Exception {
-		String sql = "insert into provider(p_id,p_name,p_tele,p_email,p_address) values (?,?,?,?,?)";
-		Object[] params = {provider.getP_id(), provider.getP_name(), provider.getP_tele(), provider.getP_email(), provider.getP_address()};
+		String sql = "insert into provider(p_name,p_tele,p_email,p_address) values (?,?,?,?)";
+		Object[] params = {provider.getP_name(), provider.getP_tele(), provider.getP_email(), provider.getP_address()};
 		return this.exeUpdate(jdbc, sql, params);
 	}
 
@@ -37,7 +37,7 @@ public class ProviderDaoImpl extends BaseDao implements ProviderDao {
 		Object[] params = {p_id};
 		ResultSet resultSet = this.exeQuery(jdbc, sql, params);
 		if (resultSet.next())
-			provider = new Provider(resultSet.getString("p_id"),
+			provider = new Provider(resultSet.getInt("p_id"),
 					resultSet.getString("p_name"),
 					resultSet.getString("p_tele"),
 					resultSet.getString("p_email"),
@@ -51,7 +51,7 @@ public class ProviderDaoImpl extends BaseDao implements ProviderDao {
 		String sql = "select * from provider";
 		ResultSet resultSet = this.exeQuery(jdbc, sql, null);
 		while (resultSet.next())
-			providers.add(new Provider(resultSet.getString("p_id"),
+			providers.add(new Provider(resultSet.getInt("p_id"),
 					resultSet.getString("p_name"),
 					resultSet.getString("p_tele"),
 					resultSet.getString("p_email"),
@@ -61,13 +61,13 @@ public class ProviderDaoImpl extends BaseDao implements ProviderDao {
 
 	@Override
 	public PageModel<Provider> providerPageModel(JDBC jdbc, int pageSize, int currentPage) throws Exception {
-		String sql = "select * from provider limit ?,?";
+		String sql = "select * from provider order by p_id desc limit ?,?";
 		Object[] params = {(currentPage - 1) * pageSize, pageSize};
 		ResultSet resultSet = this.exeQuery(jdbc, sql, params);
 		PageModel<Provider> providerPageModel = new PageModel<>();
 		List<Provider> providers = new ArrayList<>();
 		while (resultSet.next())
-			providers.add(new Provider(resultSet.getString("p_id"),
+			providers.add(new Provider(resultSet.getInt("p_id"),
 					resultSet.getString("p_name"),
 					resultSet.getString("p_tele"),
 					resultSet.getString("p_email"),

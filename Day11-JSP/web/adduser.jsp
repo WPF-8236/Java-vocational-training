@@ -10,14 +10,10 @@
         <base href="<%=basePath%>">
     </head>
     <body>
-        <form action="user.html" method="post">
+        <form action="doUserServlet.jsp?action=addUser" method="post">
             <table border="1" width="500" align="center">
                 <tr>
                     <td colspan="2" bgcolor="#e7e7e7">添加</td>
-                </tr>
-                <tr>
-                    <td>userId</td>
-                    <td><input type="text" name="userId" id="userId"/></td>
                 </tr>
                 <tr>
                     <td>userName</td>
@@ -25,7 +21,7 @@
                 </tr>
                 <tr>
                     <td>password</td>
-                    <td><input type="text" name="password" id="password"/></td>
+                    <td><input type="password" name="password" id="password"/></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type="submit" value="确定"/></td>

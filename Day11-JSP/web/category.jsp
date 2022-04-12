@@ -1,7 +1,10 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.wpf.jsp.domain.Category" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    List<Category> categories = (List<Category>) request.getAttribute("categories");
 %>
 <html>
     <head>
@@ -18,26 +21,35 @@
         <a href="addcategory.jsp">添加</a>
         <table border="1" width="100%">
             <tr align="center" bgcolor="#e7e7e7">
-                <td height="40">c_id</td>
-                <td>c_name</td>
+                <td height="40">类别编号</td>
+                <td>类编名称</td>
                 <td>操作</td>
             </tr>
+            <%
+                for (Category category : categories) {
+            %>
             <tr align="center">
-                <td>1</td>
-                <td>王潘锋</td>
+                <td><%=category.getC_id()%>
+                </td>
+                <td><%=category.getC_name()%>
+                </td>
                 <td>
-                    <a href="updatecategory.jsp">修改</a>/
-                    <a href="#" onclick="return confirm('真的要删除吗?');">删除</a>
+                    <a href="doCategoryServlet.jsp?action=getOneCategory&c_id=<%=category.getC_id()%>">修改</a>/
+                    <a href="doCategoryServlet.jsp?action=deleteCategory&c_id=<%=category.getC_id()%>" onclick="return confirm('真的要删除吗?');">删除</a>
                 </td>
             </tr>
+            <%
+                }
+            %>
+
         </table>
         <table border="1" width="100%">
             <tr align="center">
                 <td>
-                    <a href="#">首页</a>
-                    <a href="#">上一页</a>
-                    <a href="#">下一页</a>
-                    <a href="#">尾页</a>
+                    <a href="doCategoryServlet.jsp?action=getCategoriesLimitFirst">首页</a>
+                    <a href="doCategoryServlet.jsp?action=getCategoriesLimitUpPage">上一页</a>
+                    <a href="doCategoryServlet.jsp?action=getCategoriesLimitDownPage">下一页</a>
+                    <a href="doCategoryServlet.jsp?action=getCategoriesLimitEnd">尾页</a>
                 </td>
             </tr>
         </table>

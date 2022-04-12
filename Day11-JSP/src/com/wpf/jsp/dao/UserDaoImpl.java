@@ -44,7 +44,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 
 	@Override
 	public PageModel<User> userModel(JDBC jdbc, int pageSize, int currentPage) throws Exception {
-		String sql = "select * from my_user limit ?,?";
+		String sql = "select * from my_user order by id desc limit  ?,?";
 		Object[] params = {(currentPage - 1) * pageSize, pageSize};
 		ResultSet resultSet = this.exeQuery(jdbc, sql, params);
 		PageModel<User> pageModel = new PageModel<>();
@@ -70,5 +70,16 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 		if (resultSet.next())
 			user1 = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3));
 		return user1;
+	}
+
+	@Override
+	public User getUser(JDBC jdbc, String id) throws Exception {
+		User user = null;
+		String sql = "select * from my_user where id = ?";
+		Object[] params = {id};
+		ResultSet resultSet = this.exeQuery(jdbc, sql, params);
+		if (resultSet.next())
+			user = new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3));
+		return user;
 	}
 }

@@ -1,22 +1,30 @@
 package com.wpf.jsp.domain;
 
 public class Category {
-	private String c_id;
+	private int c_id;
 	private String c_name;
 
 	public Category() {
 	}
 
-	public Category(String c_id, String c_name) {
+	public Category(int c_id) {
+		this.c_id = c_id;
+	}
+
+	public Category(String c_name) {
+		this.c_name = c_name;
+	}
+
+	public Category(int c_id, String c_name) {
 		this.c_id = c_id;
 		this.c_name = c_name;
 	}
 
-	public String getC_id() {
+	public int getC_id() {
 		return c_id;
 	}
 
-	public void setC_id(String c_id) {
+	public void setC_id(int c_id) {
 		this.c_id = c_id;
 	}
 

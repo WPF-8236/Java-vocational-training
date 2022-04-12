@@ -11,8 +11,8 @@ import java.util.List;
 public class CategoryDaoImpl extends BaseDao implements CategoryDao {
 	@Override
 	public int insertCategory(JDBC jdbc, Category category) throws Exception {
-		String sql = "insert into category(c_id,c_name) values (?,?)";
-		Object[] params = {category.getC_id(), category.getC_name()};
+		String sql = "insert into category(c_name) values (?)";
+		Object[] params = {category.getC_name()};
 		return this.exeUpdate(jdbc, sql, params);
 	}
 
@@ -37,7 +37,7 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
 		Object[] params = {c_id};
 		ResultSet resultSet = this.exeQuery(jdbc, sql, params);
 		if (resultSet.next())
-			category = new Category(resultSet.getString("c_id"),
+			category = new Category(resultSet.getInt("c_id"),
 					resultSet.getString("c_name"));
 		return category;
 	}
@@ -45,23 +45,23 @@ public class CategoryDaoImpl extends BaseDao implements CategoryDao {
 	@Override
 	public List<Category> selectAllCategory(JDBC jdbc) throws Exception {
 		List<Category> categories = new ArrayList<>();
-		String sql = "select * from provider";
+		String sql = "select * from category";
 		ResultSet resultSet = this.exeQuery(jdbc, sql, null);
 		while (resultSet.next())
-			categories.add(new Category(resultSet.getString("c_id"),
+			categories.add(new Category(resultSet.getInt("c_id"),
 					resultSet.getString("c_name")));
 		return categories;
 	}
 
 	@Override
 	public PageModel<Category> categoryPageModel(JDBC jdbc, int pageSize, int currentPage) throws Exception {
-		String sql = "select * from category limit ?,?";
+		String sql = "select * from category order by c_id desc limit ?,?";
 		Object[] params = {(currentPage - 1) * pageSize, pageSize};
 		ResultSet resultSet = this.exeQuery(jdbc, sql, params);
 		PageModel<Category> categoryPageModel = new PageModel<>();
 		List<Category> categories = new ArrayList<>();
 		while (resultSet.next())
-			categories.add(new Category(resultSet.getString("c_id"),
+			categories.add(new Category(resultSet.getInt("c_id"),
 					resultSet.getString("c_name")));
 		categoryPageModel.setList(categories);
 		categoryPageModel.setCurrentPage(currentPage);

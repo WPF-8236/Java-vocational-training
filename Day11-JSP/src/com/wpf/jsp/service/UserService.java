@@ -16,7 +16,13 @@ public interface UserService {
 
 	List<User> get();
 
+	User getOne(String id);
+
 	List<User> getUsersLimit(int pageSize, int currentPage);
+
+	List<User> getUsersLimitFirst();
+
+	List<User> getUsersLimitEnd();
 
 	List<User> getUsersLimitUpPage();
 

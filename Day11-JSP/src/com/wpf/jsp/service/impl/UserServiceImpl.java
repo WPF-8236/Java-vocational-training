@@ -13,6 +13,19 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
 	private PageModel<User> userPageModel;
+	private static UserServiceImpl userService;
+
+	private UserServiceImpl() {
+
+	}
+
+	private static class Inner {
+		static final UserServiceImpl userService = new UserServiceImpl();
+	}
+
+	public static UserServiceImpl getUserService() {
+		return Inner.userService;
+	}
 
 	@Override
 	public int save(User user) {
@@ -104,6 +117,24 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public User getOne(String id) {
+		JDBC jdbc = new JDBC();
+		UserDao userDao = new UserDaoImpl();
+		User user = null;
+		try {
+			jdbc.setConnection(DButil.getConnecttion());
+			user = userDao.getUser(jdbc, id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DButil.close(jdbc);
+		}
+		return user;
+	}
+
+	@Override
 	public List<User> getUsersLimit(int pageSize, int currentPage) {
 		JDBC jdbc = new JDBC();
 		UserDao userDao = new UserDaoImpl();
@@ -120,6 +151,16 @@ public class UserServiceImpl implements UserService {
 			DButil.close(jdbc);
 		}
 		return users;
+	}
+
+	@Override
+	public List<User> getUsersLimitFirst() {
+		return this.getUsersLimit(userPageModel.getPageSize(), 1);
+	}
+
+	@Override
+	public List<User> getUsersLimitEnd() {
+		return this.getUsersLimit(userPageModel.getPageSize(), userPageModel.getTotalPage());
 	}
 
 	@Override

@@ -17,6 +17,18 @@ public class ProviderServiceImpl implements ProviderService {
 	private int num;
 	private Provider provider;
 	private List<Provider> providers;
+	private static ProviderServiceImpl providerService;
+
+	private ProviderServiceImpl() {
+	}
+
+	private static class Inner {
+		static final ProviderServiceImpl providerService = new ProviderServiceImpl();
+	}
+
+	public static ProviderServiceImpl getProviderService() {
+		return Inner.providerService;
+	}
 
 	@Override
 	public int add(Provider provider) {
@@ -116,6 +128,16 @@ public class ProviderServiceImpl implements ProviderService {
 			DButil.close(jdbc);
 		}
 		return providers;
+	}
+
+	@Override
+	public List<Provider> getProvidersLimitFirst() {
+		return this.getProvidersLimit(providerPageModel.getPageSize(), 1);
+	}
+
+	@Override
+	public List<Provider> getProvidersLimitEnd() {
+		return this.getProvidersLimit(providerPageModel.getPageSize(), providerPageModel.getTotalPage());
 	}
 
 	@Override

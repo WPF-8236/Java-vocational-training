@@ -18,6 +18,8 @@ public interface CategoryService {
 	List<Category> getCategoriesLimit(int pageSize, int currentPage);
 
 	List<Category> getCategoriesLimitUpPage();
+	List<Category> getCategoriesLimitFirst();
+	List<Category> getCategoriesLimitEnd();
 
 	List<Category> getCategoriesLimitDownPage();
 }

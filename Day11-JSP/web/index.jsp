@@ -5,31 +5,25 @@
 %>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>主页</title>
         <base href="<%=basePath%>">
+        <title>登录</title>
     </head>
     <body>
-        <table border="1" width="100%" height="100%">
-            <tr>
-                <td colspan="2" bgcolor="#99cc66" height="90"></td>
-            </tr>
-            <tr>
-                <td width="190" align="center" valign="top">
-                    <br>
-                    <a href="user.jsp" target="page">用户管理</a>
-                    <br><br>
-                    <a href="category.jsp">类别管理</a>
-                    <br><br>
-                    <a href="">产品管理</a>
-                    <br><br>
-                    <a href="progress.jsp" target="page">供应商管理</a>
-                    <br><br>
-                </td>
-                <td>
-                    <iframe src="welcome.jsp" width="100%" height="100%" name="page"></iframe>
-                </td>
-            </tr>
-        </table>
+        <form action="doUserServlet.jsp">
+            <input type="hidden" name="action" id="action" value="login">
+            <table border="1" width="500" align="center">
+                <tr>
+                    <td>userName</td>
+                    <td><input type="text" name="userName" id="userName"/></td>
+                </tr>
+                <tr>
+                    <td>password</td>
+                    <td><input type="password" name="password" id="password"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="submit" value="确定"/></td>
+                </tr>
+            </table>
+        </form>
     </body>
 </html>

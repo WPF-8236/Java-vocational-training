@@ -18,4 +18,6 @@ public interface UserDao {
 	PageModel<User> userModel(JDBC jdbc, int pageSize, int currentPage) throws Exception;
 
 	User selectUserByUser(JDBC jdbc, User user) throws Exception;
+
+	User getUser(JDBC jdbc, String id) throws Exception;
 }

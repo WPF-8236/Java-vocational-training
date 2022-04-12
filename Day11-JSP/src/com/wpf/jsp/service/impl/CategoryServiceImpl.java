@@ -20,6 +20,19 @@ public class CategoryServiceImpl implements CategoryService {
 	private int num;
 	private Category category;
 	private List<Category> categories;
+	private static CategoryServiceImpl categoryService;
+
+	private CategoryServiceImpl() {
+
+	}
+
+	public static class Inner {
+		static final CategoryServiceImpl categoryService = new CategoryServiceImpl();
+	}
+
+	public static CategoryServiceImpl getCategoryService() {
+		return Inner.categoryService;
+	}
 
 	@Override
 	public int add(Category category) {
@@ -119,6 +132,16 @@ public class CategoryServiceImpl implements CategoryService {
 			DButil.close(jdbc);
 		}
 		return categories;
+	}
+
+	@Override
+	public List<Category> getCategoriesLimitFirst() {
+		return this.getCategoriesLimit(categoryPageModel.getPageSize(), 1);
+	}
+
+	@Override
+	public List<Category> getCategoriesLimitEnd() {
+		return this.getCategoriesLimit(categoryPageModel.getPageSize(), categoryPageModel.getTotalPage());
 	}
 
 	@Override

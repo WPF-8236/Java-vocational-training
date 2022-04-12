@@ -1,10 +1,7 @@
 package com.wpf.jsp.service.impl;
 
-import com.wpf.jsp.dao.CategoryDao;
-import com.wpf.jsp.dao.CategoryDaoImpl;
 import com.wpf.jsp.dao.ProductDao;
 import com.wpf.jsp.dao.ProductDaoImpl;
-import com.wpf.jsp.domain.Category;
 import com.wpf.jsp.domain.JDBC;
 import com.wpf.jsp.domain.Product;
 import com.wpf.jsp.service.ProductService;
@@ -20,6 +17,20 @@ public class ProductServiceImpl implements ProductService {
 	private int num;
 	private Product product;
 	private List<Product> products;
+	private static ProductServiceImpl productService;
+
+	private ProductServiceImpl() {
+
+	}
+
+	private static class Inner {
+		static final ProductServiceImpl productService = new ProductServiceImpl();
+	}
+
+	public static ProductServiceImpl getProductService() {
+		return Inner.productService;
+	}
+
 
 	@Override
 	public int add(Product product) {
@@ -119,6 +130,16 @@ public class ProductServiceImpl implements ProductService {
 			DButil.close(jdbc);
 		}
 		return products;
+	}
+
+	@Override
+	public List<Product> getProductsLimitFirst() {
+		return this.getProductsLimit(productPageModel.getPageSize(), 1);
+	}
+
+	@Override
+	public List<Product> getProductsLimitEnd() {
+		return this.getProductsLimit(productPageModel.getPageSize(), productPageModel.getTotalPage());
 	}
 
 	@Override

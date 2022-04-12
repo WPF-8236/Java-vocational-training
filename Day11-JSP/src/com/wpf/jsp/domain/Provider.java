@@ -1,7 +1,7 @@
 package com.wpf.jsp.domain;
 
 public class Provider {
-	private String p_id;
+	private int p_id;
 	private String p_name;
 	private String p_tele;
 	private String p_email;
@@ -10,7 +10,11 @@ public class Provider {
 	public Provider() {
 	}
 
-	public Provider(String p_id, String p_name, String p_tele, String p_email, String p_address) {
+	public Provider(int p_id) {
+		this.p_id = p_id;
+	}
+
+	public Provider(int p_id, String p_name, String p_tele, String p_email, String p_address) {
 		this.p_id = p_id;
 		this.p_name = p_name;
 		this.p_tele = p_tele;
@@ -18,11 +22,18 @@ public class Provider {
 		this.p_address = p_address;
 	}
 
-	public String getP_id() {
+	public Provider(String p_name, String p_tele, String p_email, String p_address) {
+		this.p_name = p_name;
+		this.p_tele = p_tele;
+		this.p_email = p_email;
+		this.p_address = p_address;
+	}
+
+	public int getP_id() {
 		return p_id;
 	}
 
-	public void setP_id(String p_id) {
+	public void setP_id(int p_id) {
 		this.p_id = p_id;
 	}
 

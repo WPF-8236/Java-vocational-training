@@ -11,8 +11,8 @@ import java.util.List;
 public class ProductDaoImpl extends BaseDao implements ProductDao {
 	@Override
 	public int insertProduct(JDBC jdbc, Product product) throws Exception {
-		String sql = "insert into product(pt_id,pt_name,pt_price,pt_c_id,pt_p_id) values (?,?,?,?,?)";
-		Object[] params = {product.getPt_id(), product.getPt_name(), product.getPt_price(), product.getPt_c_id(), product.getPt_p_id()};
+		String sql = "insert into product(pt_name,pt_price,pt_c_id,pt_p_id) values (?,?,?,?)";
+		Object[] params = {product.getPt_name(), product.getPt_price(), product.getPt_c_id(), product.getPt_p_id()};
 		return this.exeUpdate(jdbc, sql, params);
 	}
 
@@ -37,8 +37,8 @@ public class ProductDaoImpl extends BaseDao implements ProductDao {
 		Object[] params = {pt_id};
 		ResultSet resultSet = this.exeQuery(jdbc, sql, params);
 		if (resultSet.next())
-			product = new Product(resultSet.getString("pt_id"),
-					resultSet.getString("pt_name"), resultSet.getDouble("pt_price"), resultSet.getString("pt_c_id"), resultSet.getString("pt_p_id"));
+			product = new Product(resultSet.getInt("pt_id"),
+					resultSet.getString("pt_name"), resultSet.getDouble("pt_price"), resultSet.getInt("pt_c_id"), resultSet.getInt("pt_p_id"));
 		return product;
 	}
 
@@ -48,20 +48,20 @@ public class ProductDaoImpl extends BaseDao implements ProductDao {
 		String sql = "select * from product";
 		ResultSet resultSet = this.exeQuery(jdbc, sql, null);
 		while (resultSet.next())
-			products.add(new Product(resultSet.getString("pt_id"),
-					resultSet.getString("pt_name"), resultSet.getDouble("pt_price"), resultSet.getString("pt_c_id"), resultSet.getString("pt_p_id")));
+			products.add(new Product(resultSet.getInt("pt_id"),
+					resultSet.getString("pt_name"), resultSet.getDouble("pt_price"), resultSet.getInt("pt_c_id"), resultSet.getInt("pt_p_id")));
 		return products;
 	}
 
 	@Override
 	public PageModel<Product> ProductPageModel(JDBC jdbc, int pageSize, int currentPage) throws Exception {
-		String sql = "select * from product limit ?,?";
+		String sql = "select * from product order by pt_id desc limit ?,?";
 		Object[] params = {(currentPage - 1) * pageSize, pageSize};
 		ResultSet resultSet = this.exeQuery(jdbc, sql, params);
 		PageModel<Product> productPageModel = new PageModel<>();
 		List<Product> products = new ArrayList<>();
 		while (resultSet.next())
-			products.add(new Product(resultSet.getString("pt_id"), resultSet.getString("pt_name"), resultSet.getDouble("pt_price"), resultSet.getString("pt_c_id"), resultSet.getString("pt_p_id")));
+			products.add(new Product(resultSet.getInt("pt_id"), resultSet.getString("pt_name"), resultSet.getDouble("pt_price"), resultSet.getInt("pt_c_id"), resultSet.getInt("pt_p_id")));
 		productPageModel.setList(products);
 		productPageModel.setCurrentPage(currentPage);
 		productPageModel.setPageSize(pageSize);

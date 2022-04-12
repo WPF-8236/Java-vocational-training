@@ -18,6 +18,8 @@ public interface ProviderService {
 	List<Provider> getProvidersLimit(int pageSize, int currentPage);
 
 	List<Provider> getProvidersLimitUpPage();
+	List<Provider> getProvidersLimitFirst();
+	List<Provider> getProvidersLimitEnd();
 
 	List<Provider> getProvidersLimitDownPage();
 }

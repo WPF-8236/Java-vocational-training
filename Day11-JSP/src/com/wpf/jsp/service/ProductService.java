@@ -18,6 +18,8 @@ public interface ProductService {
 	List<Product> getProductsLimit(int pageSize, int currentPage);
 
 	List<Product> getProductsLimitUpPage();
+	List<Product> getProductsLimitFirst();
+	List<Product> getProductsLimitEnd();
 
 	List<Product> getProductsLimitDownPage();
 }

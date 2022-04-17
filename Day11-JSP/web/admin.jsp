@@ -10,6 +10,12 @@
         <base href="<%=basePath%>">
     </head>
     <body>
+        <fieldset id="userNote">
+            <legend>公告信息</legend>
+            <div id="note">
+                hello，${user.userName}
+            </div>
+        </fieldset>
         <table border="1" width="100%" height="100%">
             <tr>
                 <td colspan="2" bgcolor="#99cc66" height="90"></td>

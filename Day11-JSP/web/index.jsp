@@ -9,8 +9,7 @@
         <title>登录</title>
     </head>
     <body>
-        <form action="doUserServlet.jsp">
-            <input type="hidden" name="action" id="action" value="login">
+        <form action="doLoginServlet.jsp">
             <table border="1" width="500" align="center">
                 <tr>
                     <td>userName</td>

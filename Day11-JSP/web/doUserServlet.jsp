@@ -4,17 +4,8 @@
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    request.setCharacterEncoding("utf-8");
     String action = request.getParameter("action");
-    String path = "index.jsp";
     UserService userService = UserServiceImpl.getUserService();
-    if ("login".equals(action)) {
-        String userName = request.getParameter("userName");
-        String password = request.getParameter("password");
-        if ("admin".equals(userName) && "admin".equals(password))
-            path = "admin.jsp";
-        response.sendRedirect(path);
-    }
     if ("getUserList".equals(action)) {
         List<User> userList = userService.getUsersLimit(5, 1);
         request.setAttribute("userList", userList);

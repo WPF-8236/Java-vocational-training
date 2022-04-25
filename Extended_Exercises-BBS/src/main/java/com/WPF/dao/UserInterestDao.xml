@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.WPF.dao.UserInterestDao">
+    <select id="selectUserInterestLikeByUId" resultType="UserInterest">
+        select *
+        from bbs_user_interest
+        where u_id = #{u_id}
+          and u_interest_dislike = 0
+    </select>
+    <select id="selectUserInterestDislikeByUId" resultType="UserInterest">
+        select *
+        from bbs_user_interest
+        where u_id = #{u_id}
+          and u_interest_dislike = 1
+    </select>
+
+    <delete id="deleteUserInterestByUInterestId">
+        delete
+        from bbs_user_interest
+        where u_interest_id = #{u_interest_id}
+    </delete>
+
+    <insert id="insertUserInterest">
+        insert into bbs_user_interest(u_id, u_interest_id, u_interest, u_interest_dislike)
+        VALUES (#{u_id}, #{u_interest_id}, #{u_interest}, #{u_interest_dislike})
+    </insert>
+</mapper>

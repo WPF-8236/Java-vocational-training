@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<script type="text/javascript">
+			function f(op) {
+				n1 = document.getElementById('n1').value;
+				n2 = document.getElementById('n2').value;
+				n1 = parseFloat(n1);
+				n2 = parseFloat(n2);
+				var result = 0;
+				if (op == "+") {
+					result = n1 + n2;
+				} else if (op == "-") {
+					result = n1 - n2;
+				}
+				document.getElementById('result').innerHTML = result;
+			}
+
+			function ff() {
+				for (var i = 1; i < 7; i++) {
+					i
+					document.write("<h" + i + ">hello</h" + i + ">");
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<table border="1" width="500" align="center">
+			<tr>
+				<td colspan="2">计算器 </td>
+			</tr>
+			<tr>
+				<td>n1</td>
+				<td>
+					<input type="text" name="n1" id="n1" />
+				</td>
+			</tr>
+			<tr>
+				<td>n2</td>
+				<td>
+					<input type="text" name="n2" id="n2" />
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input type="button" value="+" onclick="f('+')" />
+					<input type="button" value="-" onclick="f('-')" />
+					<input type="button" value="*" />
+					<input type="button" value="/" />
+					<input type="button" value="循环" onclick="ff()" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+				</td>
+				<td>
+					结果: <span id="result"> </span>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

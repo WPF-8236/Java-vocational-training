@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>键盘事件</title>
+		<style type="text/css">
+			#d {
+				border: 1px solid red;
+				width: 50px;
+				height: 50px;
+				position: absolute;
+			}
+		</style>
+		<script type="text/javascript">
+			function init() {
+				x = 200;
+				y = 300;
+				document.getElementById("d").style.top = y + "px";
+				document.getElementById("d").style.left = x + "px";
+			}
+			var x = 0;
+			var y = 0;
+			var val = 5;
+			window.onkeydown = function() {
+				var e = window.event || event;
+				var key = e.keyCode || e.which;
+				if (key == 87) {
+					y -= val;
+				} else if (key == 68) {
+					x += val;
+				} else if (key == 83) {
+					y += val;
+				} else if (key == 65) {
+					x -= val;
+				}
+				document.getElementById("d").style.top = y + "px";
+				document.getElementById("d").style.left = x + "px";
+			}
+			window.onload=init;
+		</script>
+	</head>
+	<body>
+		<div id="d">
+			dd
+		</div>
+	</body>
+</html>

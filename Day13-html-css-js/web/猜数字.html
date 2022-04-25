@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			// var num = Math.round(Math.random() * 100);
+			// var targ = 0;
+			// while (true) {
+			// 	var result = prompt("输入一个数字");
+			// 	if (result > num) {
+			// 		alert("大了");
+			// 		targ++;
+			// 	}
+			// 	if (result < num) {
+			// 		alert("小了");
+			// 		targ++;
+			// 	}
+			// 	if (result == num) {
+			// 		alert("终于猜对了，猜了：" + targ + "次");
+			// 		break;
+			// 	}
+
+			// }
+			var c;
+
+			function f() {
+				var dt = new Date();
+				var yyyy = dt.getFullYear();
+				var mm = dt.getMonth();
+				var dd = dt.getDate();
+				var hh = dt.getHours();
+				var MM = dt.getMinutes();
+				var ss = dt.getSeconds();
+				var sss = dt.getMilliseconds();
+				var timeStr = yyyy + "年" + mm + "月" + dd + "日" + hh + ":" + MM + ":" + ss + ":" + sss;
+				document.getElementById("time").value = timeStr;
+				c=setTimeout("f()",1);
+			}
+			function ff(){
+				clearTimeout(c);
+			}
+		</script>
+	</head>
+	<body>
+		<input type="button" name="" id="" value="开始" onclick="f()" />
+		<input type="button" name="" id="" value="停止" onclick="ff()" />
+		<input type="text" name="" id="time" value="" size="50" />
+	</body>
+</html>

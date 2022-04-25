@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#aa{
+				display: none;
+				width: 150px;
+				height: 150px;
+				border: 1px solid #0000FF;
+			}
+			#bb{
+				display: block;
+				width: 150px;
+				height: 150px;
+				border: 1px solid #0000FF;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" name="see" id="see" value="体育" onmouseover="a()" />
+		<input type="button" name="close" id="close" value="军事" onmouseover="b()"/>
+		<div id="aa" class="cell">
+			体育
+		</div>
+		<div id="bb" class="cell">
+			军事
+		</div>
+	</body>
+	<script type="text/javascript">
+		function a(){
+			document.getElementById("aa").style.display="block";
+			document.getElementById("bb").style.display="none";
+		}
+		function b(){
+			document.getElementById("aa").style.display="none";
+			document.getElementById("bb").style.display="block";
+		}
+	</script>
+</html>

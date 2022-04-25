@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script>
+	function ff(v){
+		//把选择的商品放到父窗中
+		var parWin=window.opener;
+		//拿到父窗中的orderList这个表
+		var orderList=parWin.document.getElementById("orderList");
+		//创建一行
+		var new_row=orderList.insertRow();
+		//创建单元格
+		var cell_0=new_row.insertCell(0)
+		cell_0.innerHTML=v.getAttribute("pno");
+
+		//创建单元格
+		var cell_1=new_row.insertCell(1)
+		cell_1.innerHTML=v.getAttribute("pname");
+
+		//创建单元格
+		var cell_2=new_row.insertCell(2)
+		cell_2.innerHTML=v.getAttribute("price");
+
+		//创建单元格
+		var cell_3=new_row.insertCell(3)
+		cell_3.innerHTML='<a href="#" onclick="compu(this);return false;">-</a><input type="text" name="num" size="3" value="1"/><a href="#" onclick="compu(this);return false;">+</a>';
+
+		//创建单元格
+		var cell_4=new_row.insertCell(4)
+		cell_4.innerHTML=v.getAttribute("price");
+
+		//创建单元格
+		var cell_5=new_row.insertCell(5)
+		cell_5.innerHTML='<a href="#" onclick="remove_(this)">移除</a>';
+		
+		parWin.sum_();
+	}
+  </script>
+ </head>
+ <body>
+  <table border="1" width="500">
+  <tr align="center">
+	<td>pno</td>
+	<td>pname</td>
+	<td>price</td>
+  </tr>
+  <tr align="center">
+	<td>1</td>
+	<td><a href="#" pno="1" pname="红烧肉" price="29" onclick="ff(this);return false;">红烧肉</a></td>
+	<td>29</td>
+  </tr>
+  <tr align="center">
+	<td>2</td>
+	<td><a href="#" pno="2" pname="白菜" price="6" onclick="ff(this);return false;">白菜</a></td>
+	<td>6</td>
+  </tr>
+  <tr align="center">
+	<td>3</td>
+	<td><a href="#" pno="3" pname="土豆" price="8" onclick="ff(this);return false;">土豆</a></td>
+	<td>8</td>
+  </tr>
+  <tr align="center">
+	<td>4</td>
+	<td><a href="#" pno="4" pname="鱼" price="15" onclick="ff(this);return false;">鱼</a></td>
+	<td>15</td>
+  </tr>
+  </table>
+ </body>
+</html>

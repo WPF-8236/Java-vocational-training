@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.cell {
+				border: 3px solid #66CC00;
+				width: 150px;
+				height: 150px;
+			}
+
+			#cell1 {
+				position: absolute;
+				left: 8px;
+				top: 8px;
+			}
+
+			#cell2 {
+				position: absolute;
+				left: 168px;
+				top: 8px;
+			}
+
+			#cell3 {
+				position: absolute;
+				left: 328px;
+				top: 8px;
+			}
+
+			#cell4 {
+				position: absolute;
+				left: 488px;
+				top: 8px;
+			}
+
+			#cell5 {
+				position: absolute;
+				left: 488px;
+				top: 168px;
+			}
+
+			#cell6 {
+				position: absolute;
+				left: 488px;
+				top: 328px;
+			}
+
+			#cell7 {
+				position: absolute;
+				left: 488px;
+				top: 488px;
+			}
+
+			#cell8 {
+				position: absolute;
+				left: 328px;
+				top: 488px;
+			}
+
+			#cell9 {
+				position: absolute;
+				left: 168px;
+				top: 488px;
+			}
+
+			#cell10 {
+				position: absolute;
+				left: 8px;
+				top: 488px;
+			}
+
+			#cell11 {
+				position: absolute;
+				left: 8px;
+				top: 328px;
+			}
+
+			#cell12 {
+				position: absolute;
+				left: 8px;
+				top: 168px;
+			}
+
+			.cellname {
+				position: absolute;
+				top: 50px;
+				left: 30px;
+				font-size: 30px;
+				color: #66CC00;
+			}
+
+			#buttons {
+				position: absolute;
+				top: 240px;
+				left: 240px;
+			}
+
+			#button1 {
+				width: 100px;
+				position: absolute;
+				top: 20px;
+				left: 25px;
+				font-size: 20px;
+			}
+
+			#button2 {
+				width: 100px;
+				position: absolute;
+				top: 80px;
+				left: 25px;
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<div id="cell1" class="cell">
+				<span class="cellname">郑汉森</span>
+			</div>
+			<div id="cell2" class="cell">
+				<span class="cellname">胡闻涛</span>
+			</div>
+			<div id="cell3" class="cell">
+				<span class="cellname">陈成东</span>
+			</div>
+			<div id="cell4" class="cell">
+				<span class="cellname">朱卫挺</span>
+			</div>
+			<div id="cell5" class="cell">
+				<span class="cellname">沈浩</span>
+			</div>
+			<div id="cell6" class="cell">
+				<span class="cellname">包一帆</span>
+			</div>
+			<div id="cell7" class="cell">
+				<span class="cellname">王鹤霖</span>
+			</div>
+			<div id="cell8" class="cell">
+				<span class="cellname">张豪</span>
+			</div>
+			<div id="cell9" class="cell">
+				<span class="cellname">卢家豪</span>
+			</div>
+			<div id="cell10" class="cell">
+				<span class="cellname">罗贤飞</span>
+			</div>
+			<div id="cell11" class="cell">
+				<span class="cellname">张申</span>
+			</div>
+			<div id="cell12" class="cell">
+				<span class="cellname">王潘锋</span>
+			</div>
+			<div id="buttons" class="cell">
+				<input type="button" name="button1" id="button1" value="开始" onclick="start()" />
+				<input type="button" name="button2" id="button2" value="结束" onclick="stop()" />
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var c;
+		var a;
+		var cell;
+
+		function sleep(ms) {
+			return new Promise((resolve) => {
+				setTimeout(resolve, ms);
+			});
+		}
+
+		function change1() {
+			cell.style = "border: 3px solid red;background:blue"
+		}
+
+		function change2() {
+			cell.style = "border: 3px solid #66CC00;"
+		}
+
+		function start() {
+			for (var i = 1; i <= 12; i++) {
+				cell = "cell" + i;
+				change1();
+			}
+			var num = Math.round(Math.random() * 12) + 1;
+			if (num > 12) {
+				num = 12;
+			}
+			var id = "cell" + num;
+			cell = document.getElementById(id);
+			change1();
+			a = setTimeout("change2()", 100);
+			c = setTimeout("start()", 100);
+		}
+
+		function stop() {
+			clearTimeout(a);
+			clearTimeout(c);
+		}
+	</script>
+</html>

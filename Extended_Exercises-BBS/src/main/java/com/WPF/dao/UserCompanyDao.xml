@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.WPF.dao.UserCompanyDao">
+    <select id="selectUserCompanyByUId" resultType="UserCompany">
+        select *
+        from bbs_user_company
+        where u_id = #{u_id}
+    </select>
+
+    <update id="updateUserCompany">
+        update bbs_user_company
+        set u_company_name=#{u_company_name},
+            u_company_posts=#{u_company_posts},
+            u_company_industry=#{u_company_industry}
+        where u_id = #{u_id}
+    </update>
+
+    <insert id="insertUserCompany">
+        insert into bbs_user_company(u_id, u_company_name, u_company_posts, u_company_industry)
+        VALUES (#{u_id}, #{u_company_name}, #{u_company_posts}, #{u_company_industry})
+    </insert>
+</mapper>

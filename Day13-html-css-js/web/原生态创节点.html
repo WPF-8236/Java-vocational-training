@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>原生态创节点</title>
+	</head>
+	<body>
+		<input type="button" name="a" id="a" value="创建行" onclick="f()" />
+		<table id="tb" border="1"></table>
+	</body>
+</html>
+<script type="text/javascript">
+	function f() {
+		//创建文本
+		var text = document.createTextNode("hello");
+		//创建单元格td
+		var td = document.createElement("td");
+		td.appendChild(text);
+		//创建行
+		var tr = document.createElement("tr");
+		tr.appendChild(td);
+		//创建表的身体部分tbody
+		var tbody = document.createElement("tbody");
+		tbody.appendChild(tr);
+		//将身体部分加入到表中
+		document.getElementById("tb").appendChild(tbody);
+	}
+</script>

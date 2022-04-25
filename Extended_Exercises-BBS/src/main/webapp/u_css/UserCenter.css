@@ -1,0 +1,263 @@
+.el-header, .el-footer {
+    background-color: #B3C0D1;
+    color: #333;
+    height: 60px;
+}
+
+.el-aside {
+    /*background-color: #D3DCE6;*/
+    color: #333;
+    height: 1020px;
+    width: 300px;
+    text-align: center;
+}
+
+.el-main {
+    background-color: #E9EEF3;
+    color: #333;
+    height: 960px;
+}
+
+.param {
+    display: none;
+}
+
+#header-title {
+    border: 2px solid white;
+    width: 200px;
+    height: 50px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    color: #ffffff;
+    font-size: 28px;
+    padding: 4px 25px;
+    background-image: url("../img/index_bg.jfif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: 50%;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+a:focus {
+    text-decoration: none;
+}
+
+#nav-left {
+    /*border: 1px solid blue;*/
+    width: 400px;
+    height: 50px;
+    position: absolute;
+    left: 230px;
+    top: 5px;
+}
+
+#nav-left ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#nav-left li {
+    padding-top: 10px;
+    padding-left: 5px;
+    margin-right: 5px;
+    width: 50px;
+    height: 50px;
+    float: left;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    font-size: 18px;
+    background-image: url("../img/index_bg.jfif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: 50%;
+}
+
+#nav-left a {
+    color: #ffffff;
+}
+
+.el-select .el-input {
+    width: 130px;
+}
+
+.input-with-select .el-input-group__prepend {
+    background-color: #fff;
+}
+
+#search {
+    width: 600px;
+    position: absolute;
+    left: 780px;
+}
+
+#nav-right {
+    /*border: 1px solid blue;*/
+    width: 350px;
+    height: 50px;
+    position: absolute;
+    right: 0px;
+    top: 5px;
+}
+
+#nav-right ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#nav-right li {
+    padding-top: 10px;
+    padding-left: 5px;
+    margin-right: 5px;
+    width: 50px;
+    height: 50px;
+    float: left;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    font-size: 18px;
+    background-image: url("../img/index_bg.jfif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: 50%;
+}
+
+#nav-right a {
+    color: #ffffff;
+}
+
+#nav-ul-img {
+    padding-top: 0px;
+    padding-left: 5px;
+    margin-right: 5px;
+    width: 60px;
+    height: 60px;
+    float: left;
+    color: #ffffff;
+}
+
+.el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+}
+
+.el-icon-arrow-down {
+    font-size: 12px;
+}
+
+.demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.el-dropdown-menu__item {
+    text-align: center;
+}
+
+#el-footer-detial {
+    color: #ffffff;
+    text-align: center;
+    font-size: 30px;
+}
+
+#personal_information {
+    background: white;
+    height: 1200px;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+
+#personal_information_div1 {
+    width: 1000px;
+    height: 160px;
+}
+
+#personal_information_div1_img {
+    width: 140px;
+    height: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 25px;
+}
+
+#personal_information_div1_uName {
+    width: 140px;
+    height: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 30px;
+}
+
+#personal_information_div2 {
+    padding: 16px;
+}
+
+#personal_information_div3 {
+    padding: 16px;
+}
+
+#personal_information_div4 {
+    padding: 16px;
+}
+
+#personal_information_div5 {
+    padding: 16px;
+}
+
+.el-tag + .el-tag {
+    margin-left: 10px;
+}
+
+.button-new-tag {
+    margin-left: 10px;
+    height: 32px;
+    line-height: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.input-new-tag {
+    width: 90px;
+    margin-left: 10px;
+    vertical-align: bottom;
+}
+
+#account_settings {
+    background: white;
+    height: 920px;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+#account_settings_div1 {
+padding: 16px;
+}

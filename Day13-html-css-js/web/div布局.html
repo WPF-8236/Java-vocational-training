@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>div布局</title>
+		<style type="text/css">
+			#top {
+				border: 1px solid red;
+				width: 1000px;
+				height: 90px;
+			}
+
+			#main {
+				border: 0px solid blue;
+				width: 1000px;
+				height: 400px;
+				margin-top: 20px;
+			}
+
+			#mleft {
+				border: 0px solid blue;
+				width: 300px;
+				height: 396px;
+				float: left;
+			}
+
+			#mcenter {
+				border: 1px solid red;
+				width: 333px;
+				height: 396px;
+				float: left;
+				margin-left: 30px;
+			}
+
+			#mright {
+				border: 1px solid red;
+				width: 300px;
+				height: 396px;
+				float: left;
+			}
+
+			#mleft ul {
+				border: 0px solid #66cc00;
+				list-style: none;
+				padding: 0px;
+				margin: 0px;
+			}
+
+			#mleft ul li {
+				border-bottom: 1px dashed #d8d8d8;
+				height: 30px;
+				line-height: 30px;
+				padding-left: 30px;
+				background: url(1.png);
+				background-size: 15px;
+				background-repeat: no-repeat;
+				background-position: 15px 50%;
+			}
+
+			#mleft h3 {
+				border: 0px solid blue;
+				height: 40px;
+				line-height: 40px;
+				margin-top: 0px;
+				padding-left: 15px;
+				margin-bottom: 0px;
+			}
+
+			#mleft li i {
+				float: right;
+			}
+
+			body {
+				width: 1000px;
+				text-align: center;
+				margin: 0px auto;
+			}
+
+			* {
+				margin: 0px auto;
+			}
+
+			#zs {
+				border: 1px solid red;
+				width: 1000px;
+				height: 200px;
+			}
+
+			#zs dl {
+				border: 1px solid red;
+				width: 210px;
+				height: 170px;
+				float: left;
+				padding: 0px;
+				margin-left: 25px;
+			}
+
+			#zs dt {
+				border: 1px solid blue;
+			}
+
+			#zs dd {
+				border: 1px solid blue;
+				margin: 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="top">1</div>
+		<div id="main">
+			<div id="mleft">
+				<h3>新闻</h3>
+				<ul>
+					<li><i>04/18</i>俄罗斯要摧毁“星链”？</li>
+					<li><i>04/18</i>俄罗斯要摧毁“星链”？</li>
+					<li><i>04/18</i>俄罗斯要摧毁“星链”？</li>
+					<li><i>04/18</i>俄罗斯要摧毁“星链”？</li>
+					<li><i>04/18</i>俄罗斯要摧毁“星链”？</li>
+					<li><i>04/18</i>俄罗斯要摧毁“星链”？</li>
+					<li><i>04/18</i>俄罗斯要摧毁“星链”？</li>
+					<li><i>04/18</i>俄罗斯要摧毁“星链”？</li>
+				</ul>
+			</div>
+			<div id="mcenter">
+				3
+			</div>
+			<div id="mright">
+				4
+			</div>
+		</div>
+		<div id="zs">
+			<dl>
+				<dt><img src="1.png" width="208" /></dt>
+				<dd>xxxxxxxxxxxxx</dd>
+				<dd>xxxxxxxxxxxxx</dd>
+			</dl>
+			<dl>
+				<dt><img src="1.png" width="208" /></dt>
+				<dd>xxxxxxxxxxxxx</dd>
+				<dd>xxxxxxxxxxxxx</dd>
+			</dl>
+			<dl>
+				<dt><img src="1.png" width="208" /></dt>
+				<dd>xxxxxxxxxxxxx</dd>
+				<dd>xxxxxxxxxxxxx</dd>
+			</dl>
+			<dl>
+				<dt><img src="1.png" width="208" /></dt>
+				<dd>xxxxxxxxxxxxx</dd>
+				<dd>xxxxxxxxxxxxx</dd>
+			</dl>
+		</div>
+	</body>
+</html>

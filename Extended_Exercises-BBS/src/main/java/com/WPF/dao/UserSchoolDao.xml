@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.WPF.dao.UserSchoolDao">
+    <select id="selectUserSchoolByUId" resultType="UserSchool">
+        select *
+        from bbs_user_school
+        where u_id = #{u_id}
+    </select>
+    <update id="updateUserSchool">
+        update bbs_user_school
+        set u_school_name=#{u_school_name},
+            u_school_profession=#{u_school_profession},
+            u_school_start=#{u_school_start},
+            u_school_end=#{u_school_end},
+            u_school_education=#{u_school_education}
+        where u_id = #{u_id}
+    </update>
+    <insert id="insertUserSchool">
+        insert into bbs_user_school(u_id, u_school_name, u_school_profession, u_school_start, u_school_end,
+                                    u_school_education)
+        VALUES (#{u_id}, #{u_school_name}, #{u_school_profession}, #{u_school_start}, #{u_school_end},
+                #{u_school_education})
+    </insert>
+</mapper>

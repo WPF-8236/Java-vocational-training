@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			function f(){
+				document.getElementById("c").style.display="block";
+				var as= document.getElementsByTagName("a");
+				for(var i=0,j=as.length;i<j;i++)
+					as[i].onclick=function (){
+						document.getElementById("b").innerHTML=this.innerHTML
+					};
+			}
+			function ff(v){
+				console.log(v)
+			}
+		</script>
+		<style type="text/css">
+			#c{
+				display: none;
+				border: 1px solid #0000FF;
+				width: 200px;
+				height: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<span id="a" onclick="f()">
+			城市：
+		</span>
+		<span id="b"></span>
+		<div id="c">
+			<a href="#">北京</a>
+			<a href="#">上海</a>
+			<a href="#">浙江</a>
+			<a href="#">江苏</a>
+		</div>
+	</body>
+</html>

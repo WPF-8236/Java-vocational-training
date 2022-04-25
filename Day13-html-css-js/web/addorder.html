@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>添加订单</title>
+	</head>
+	<body>
+		<table border="1" width="900" align="center">
+			<tr>
+				<td>订单号</td>
+				<td><input type="text" name="orderNo" id="orderNo" value="" /></td>
+				<td>日期</td>
+				<td><input type="time" name="orderTime" id="orderTime" value="" /></td>
+			</tr>
+			<tr>
+				<td>操作者</td>
+				<td><input type="text" name="orderEmp" id="orderEmp" value="" /></td>
+				<td>顾客</td>
+				<td><input type="text" name="orderCustomer" id="orderCustomer" value="" />
+					<a href="#" onclick="f();return false;">选产商品</a>
+					总价:<span id="orderTotal"></span>
+				</td>
+			</tr>
+		</table>
+		<table id="orderList" border="1" width="900" align="center"> </table>
+		<table border="1" width="900" align="center">
+			<tr>
+				<td><input type="button" name="put" id="put" value="提交" /></td>
+			</tr>
+		</table>
+	</body>
+</html>
+<script type="text/javascript">
+	function f(){
+		window.open("showOrder.html",window,"width=500px,height=300px,top=500px,left=500px");
+	}
+	function remove_(v){
+			//a->td->tr
+			var tr=v.parentNode.parentNode;
+			//拿到当前行的，自已知道的行索引，就是你是第几行
+			var row_index=tr.rowIndex;
+			//表orderList删除行。
+			document.getElementById("orderList").deleteRow(row_index);
+	
+			sum_();
+		}
+	
+		function sum_(){
+			var orderList=document.getElementById("orderList");
+			var sum=0;
+			for(var i=0;i<orderList.rows.length;i++){
+				var price=parseFloat(orderList.rows[i].cells[4].innerHTML);
+				sum+=price;
+			}
+			document.getElementById("orderTotal").innerHTML=sum;
+		}
+	
+		function compu(v){
+			
+			var current_row=v.parentNode.parentNode;
+			//先拿钱
+			var price=parseFloat(current_row.cells[2].firstChild.nodeValue);
+	
+			var num=current_row.cells[3].childNodes[1].value
+			//取得运算符+，-
+			var op=v.innerHTML;
+			if("+"==op){
+				num++;
+			}else if("-"==op){
+				if(num<=1){
+					num=1;
+				}else{
+					num--;
+				}
+				
+			}
+			
+			current_row.cells[3].childNodes[1].value=num;
+	
+			//计算
+			var xj=price*num
+			//
+			current_row.cells[4].innerHTML=xj;
+			
+			//
+			sum_();
+		}
+</script>

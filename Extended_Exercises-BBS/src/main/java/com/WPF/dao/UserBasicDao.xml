@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.WPF.dao.UserBasicDao">
+    <select id="selectUserBasicByUId" resultType="UserBasic">
+        select *
+        from bbs_user_basic
+        where u_id = #{u_id}
+    </select>
+    <update id="updateUserBasic">
+        update bbs_user_basic
+        set u_name=#{u_name},
+            u_gender=#{u_gender},
+            u_age=#{u_age},
+            u_introduction=#{u_introduction},
+            u_address=#{u_address}
+        where u_id = #{u_id}
+    </update>
+    <insert id="insertUserBasic">
+        insert into bbs_user_basic(u_id, u_name, u_age, u_introduction, u_address)
+        VALUES (#{u_id}, #{u_name}, #{u_age}, #{u_introduction}, #{u_address})
+    </insert>
+    <update id="updateUserBasicUImg">
+        update bbs_user_basic
+        set u_img=#{u_img}
+        where u_id = #{u_id}
+    </update>
+
+</mapper>

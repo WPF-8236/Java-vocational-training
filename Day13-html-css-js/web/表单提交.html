@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<script>
+			function f() {
+				//1.文档丧单名友单元素名值 
+				//alert(document.frm.userName.value);
+				var userName = document.getElementById("userName");
+				var age = document.getElementById("age");
+				if (userName.value.length <= 0) {
+					alert("姓名不能为空");
+					return false;
+				}
+				if (age.value.length <= 0) {
+					alert("年的不能为空");
+					return false;
+				}
+				return true;
+			}
+
+			function f1() { //1, 文档麦单名表单元素名值 
+				//alert(document.frm.userName.vailue);
+				var userName = document.getElementById("userName1");
+				var age = document.getElementById("age1");
+				if (userName.value.length <= 0) {
+					alert("姓名不能为全");
+					return false;
+				}
+				if (age.value.length <= 0) {
+					alert("年龄不能为空");
+					return false;
+				}
+				//让表单提交
+				document.getElementById("frm1").submit();
+			}
+		</script>
+	</head>
+	<body>
+		<form method="post" action="1.html" onsubmit="return f();" name="frm">
+			<table border="1" width="500" align="center">
+				<tr>
+					<td>名称</td>
+					<td>
+						<input type="text" name="userName" id="userName">
+					</td>
+				</tr>
+				<tr>
+					<td>age</td>
+					<td>
+						<input type="text" name="age" id="age">
+					</td>
+				</tr>
+				<tr>
+					<td> </td>
+					<td>
+						<input type="submit" value="确定">
+					</td>
+				<tr>
+			</table>
+		</form>
+		<hr />
+		<form method="post" action="1.html" id="frm1">
+			<table border="1" width="500" align="center">
+				<tr>
+					<td>名称</td>
+					<td> <input type="text" name="userName" id="userName1"> </td>
+				</tr>
+				<tr>
+					<td>age</td>
+					<td>
+						<input type="text" name="age" id="age1">
+					</td>
+				</tr>
+				<tr>
+					<td> </td>
+					<td>
+						<input type="button" value="确定" onclick="f1()">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

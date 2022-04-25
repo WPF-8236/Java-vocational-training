@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<script>
+			function f() {
+				var all = document.getElementById("all");
+				var ahs = document.getElementsByName("ah");
+				if (all.checked == true) {
+					for (var i = 0; i < ahs.length; i++) {
+						ahs[i].checked = true;
+					}
+				} else {
+					for (var i = 0; i < ahs.length; i++) {
+						ahs[i].checked = false;
+					}
+				}
+			}
+
+			function ff() {
+				var all = document.getElementById("all");
+				var ahs = document.getElementsByName("ah");
+				for (var i = 0; i < ahs.length; i++) {
+					if (ahs[i].checked == true) {
+						all.checked = true;
+						break;
+					}else{
+						all.checked = false;
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<input type="checkbox" id="all" value="爱好" onclick="f();" />爱好
+		<hr />
+		<input type="checkbox" name="ah" value="电影" onclick="ff();" /> 电影
+		<input type="checkbox" name="ah" value="运动" onclick="ff();" /> 运动
+		<input type="checkbox" name="ah" value="看书" onclick="ff();" />看书
+		<input type="checkbox" name="ah" value="钓鱼" onclick="ff();" /> 钓鱼
+	</body>
+</html>

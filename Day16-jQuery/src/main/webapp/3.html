@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/jquery-3.6.0.js"></script>
+		<script>
+			$(function() {
+				// $('a[href="#"]').css('color','red');
+				// $('[href!="#"]').css('color','red');
+				// $('[href^="a"]').css('color','red');
+				// $('[href$="a"]').css('color','red');		
+				// $('[href*="a"]').css('color','red');
+				// $('li:first').css('color','blue');
+				// $('li:last').css('color','blue');
+				// $('li:even').css('background','#66cc66');
+				// $('li:odd').css('background','#dddddd');
+				// $('li:eq(3)').css('color','red');
+				// $('li:gt(3)').css('color','blue');
+				// $('li:lt(3)').css('color','#ffcc00');
+				$('#age').focus();
+				$(':focus').css('border','2px solid red');
+			})
+		</script>
+	</head>
+	<body>
+		<input type="text" name="age" id="age" />
+		<ul>
+			<li>aa</li>
+			<li>bb</li>
+			<li>cc</li>
+			<li>dd</li>
+			<li>ee</li>
+			<li>ff</li>
+		</ul>
+		<a href="#">#</a><br />
+		<a href="">bca</a><br />
+		<a href="">acb</a><br />
+		<a href="abc">abc</a><br />
+		<a href="bca">bca</a><br />
+		<a href="acb">acb</a><br />
+
+	</body>
+</html>

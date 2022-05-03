@@ -1,9 +1,6 @@
 package com.WPF.service;
 
-import com.WPF.domain.UserBasic;
-import com.WPF.domain.UserCompany;
-import com.WPF.domain.UserInterest;
-import com.WPF.domain.UserSchool;
+import com.WPF.domain.*;
 
 import java.util.List;
 
@@ -27,4 +24,16 @@ public interface UserService {
 	int insertUserInterest(UserInterest userInterest);
 
 	int deleteUserInterestByUInterestId(String u_interest_id);
+
+	int updateUserPassword(String u_id, String u_password);
+
+	int updateUserPhone(String u_id, String u_phone);
+
+	int updateUserEmail(String u_id, String u_email);
+
+	int deleteUserByUId(String u_id);
+
+	List<Plate> getPlateListByUId(String u_id);
+
+	int addAPlate(Plate plate);
 }

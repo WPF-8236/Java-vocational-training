@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.WPF.dao.UserListDao">
+    <select id="selectAllUser" resultType="UserList">
+        select bbs_user_grade.*, bub.u_name
+        from bbs_user_grade
+                 join bbs_user_basic bub on bbs_user_grade.u_id = bub.u_id
+    </select>
+    <select id="selectUserByUId" resultType="UserList">
+        select bbs_user_grade.*, bub.u_name
+        from bbs_user_grade
+                 join bbs_user_basic bub on bbs_user_grade.u_id = bub.u_id
+        where bub.u_id like concat('%', #{input}, '%')
+    </select>
+    <select id="selectUserByUName" resultType="UserList">
+        select bbs_user_grade.*, bub.u_name
+        from bbs_user_grade
+                 join bbs_user_basic bub on bbs_user_grade.u_id = bub.u_id
+        where bub.u_name like concat('%', #{input}, '%')
+    </select>
+    <select id="selectUserByUGrade" resultType="UserList">
+        select bbs_user_grade.*, bub.u_name
+        from bbs_user_grade
+                 join bbs_user_basic bub on bbs_user_grade.u_id = bub.u_id
+        where u_grade = 1
+    </select>
+
+</mapper>

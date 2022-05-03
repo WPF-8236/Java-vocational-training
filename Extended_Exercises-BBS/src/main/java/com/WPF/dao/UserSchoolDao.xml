@@ -23,4 +23,9 @@
         VALUES (#{u_id}, #{u_school_name}, #{u_school_profession}, #{u_school_start}, #{u_school_end},
                 #{u_school_education})
     </insert>
+    <delete id="deleteUserByUId">
+        delete
+        from bbs_user_school
+        where u_id = #{u_id}
+    </delete>
 </mapper>

@@ -1,9 +1,7 @@
 package com.WPF.controller;
 
-import com.WPF.domain.UserBasic;
-import com.WPF.domain.UserCompany;
-import com.WPF.domain.UserInterest;
-import com.WPF.domain.UserSchool;
+import com.WPF.domain.*;
+import com.WPF.service.AdminService;
 import com.WPF.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
@@ -25,6 +23,8 @@ import java.util.UUID;
 public class UserController {
 	@Resource
 	private UserService userService;
+	@Resource
+	private AdminService adminService;
 
 	private String json;
 	private final ObjectMapper objectMapper = new ObjectMapper();
@@ -91,6 +91,15 @@ public class UserController {
 		response.setContentType("text/html;charset=utf-8");
 		json = request.getParameter("u_id");
 		return userService.getUserInterestByUId(objectMapper.readValue(json, String.class), 1);
+	}
+
+	@RequestMapping("/getPlateListByUId")
+	@ResponseBody
+	public List<Plate> getPlateListByUId(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		json = request.getParameter("u_id");
+		return userService.getPlateListByUId(objectMapper.readValue(json, String.class));
 	}
 
 
@@ -195,6 +204,116 @@ public class UserController {
 			printWriter.close();
 		} else {
 			json = objectMapper.writeValueAsString("添加失败！！");
+			printWriter.print(json);
+			printWriter.close();
+		}
+	}
+
+	@RequestMapping("/putChangeUPassword")
+	public void putChangeUPassword(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		printWriter = response.getWriter();
+		String u_id = request.getParameter("u_id");
+		String u_password = request.getParameter("u_password");
+		if (userService.updateUserPassword(objectMapper.readValue(u_id, String.class), objectMapper.readValue(u_password, String.class)) != 0) {
+			json = objectMapper.writeValueAsString("修改成功");
+			printWriter.print(json);
+			printWriter.close();
+		} else {
+			json = objectMapper.writeValueAsString("修改失败！！");
+			printWriter.print(json);
+			printWriter.close();
+		}
+	}
+
+	@RequestMapping("/putUserPhone")
+	public void putUserPhone(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		printWriter = response.getWriter();
+		String u_id = request.getParameter("u_id");
+		String u_phone = request.getParameter("u_phone");
+		if (userService.updateUserPhone(objectMapper.readValue(u_id, String.class), objectMapper.readValue(u_phone, String.class)) != 0) {
+			json = objectMapper.writeValueAsString("修改成功");
+			printWriter.print(json);
+			printWriter.close();
+		} else {
+			json = objectMapper.writeValueAsString("修改失败！！");
+			printWriter.print(json);
+			printWriter.close();
+		}
+	}
+
+	@RequestMapping("/putUserEmail")
+	public void putUserEmail(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		printWriter = response.getWriter();
+		String u_id = request.getParameter("u_id");
+		String u_email = request.getParameter("u_email");
+		if (userService.updateUserEmail(objectMapper.readValue(u_id, String.class), objectMapper.readValue(u_email, String.class)) != 0) {
+			json = objectMapper.writeValueAsString("修改成功");
+			printWriter.print(json);
+			printWriter.close();
+		} else {
+			json = objectMapper.writeValueAsString("修改失败！！");
+			printWriter.print(json);
+			printWriter.close();
+		}
+	}
+
+	@RequestMapping("/deleteUser")
+	public void deleteUser(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		printWriter = response.getWriter();
+		json = request.getParameter("u_id");
+		if (userService.deleteUserByUId(objectMapper.readValue(json, String.class)) != 0) {
+			json = objectMapper.writeValueAsString("注销成功");
+			printWriter.print(json);
+			printWriter.close();
+		} else {
+			json = objectMapper.writeValueAsString("注销失败！！");
+			printWriter.print(json);
+			printWriter.close();
+		}
+	}
+
+	@RequestMapping("/addAPlate")
+	public void addAPlate(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		printWriter = response.getWriter();
+		json = request.getParameter("addPlate");
+		Plate plate = objectMapper.readValue(json, Plate.class);
+		plate.setP_id(new Date().toLocaleString());
+		plate.setP_status(2);
+		if (userService.addAPlate(plate) != 0) {
+			json = objectMapper.writeValueAsString("添加成功");
+			printWriter.print(json);
+			printWriter.close();
+		} else {
+			json = objectMapper.writeValueAsString("添加失败！！");
+			printWriter.print(json);
+			printWriter.close();
+		}
+	}
+
+	@RequestMapping("/updateAPlate")
+	public void updateAPlate(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		printWriter = response.getWriter();
+		json = request.getParameter("changePlate");
+		Plate plate = objectMapper.readValue(json, Plate.class);
+		plate.setP_status(2);
+		if (adminService.updateAPlate(plate) != 0) {
+			json = objectMapper.writeValueAsString("修改成功");
+			printWriter.print(json);
+			printWriter.close();
+		} else {
+			json = objectMapper.writeValueAsString("修改失败！！");
 			printWriter.print(json);
 			printWriter.close();
 		}

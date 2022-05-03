@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.WPF.dao.PlateDao">
+    <insert id="insertAPlate">
+        insert into bbs_plate(p_id, p_name, p_p_count, p_comment_count, p_description, p_u_id, p_status)
+        VALUES (#{p_id}, #{p_name}, #{p_p_count}, #{p_comment_count}, #{p_description}, #{p_u_id}, #{p_status})
+    </insert>
+
+    <select id="selectAllPlate" resultType="Plate">
+        select *
+        from bbs_plate
+    </select>
+
+    <update id="updatePlateStatus">
+        update bbs_plate
+        set p_status=#{tag}
+        where p_id = #{p_id}
+    </update>
+
+    <delete id="deletePlateByPId">
+        delete
+        from bbs_plate
+        where p_id = #{p_id}
+    </delete>
+
+    <update id="updatePlate">
+        update bbs_plate
+        set p_name=#{p_name},
+            p_description=#{p_description},
+            p_u_id=#{p_u_id},
+            p_status=#{p_status}
+        where p_id = #{p_id}
+    </update>
+    <select id="getPlateListByUId" resultType="Plate">
+        select *
+        from bbs_plate
+        where p_u_id = #{u_id}
+    </select>
+</mapper>

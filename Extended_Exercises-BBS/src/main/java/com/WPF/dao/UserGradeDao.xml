@@ -14,4 +14,28 @@
         insert into bbs_user_grade(u_id, u_password)
         VALUES (#{u_id}, #{u_password})
     </insert>
+
+    <update id="updateUserPassword">
+        update bbs_user_grade
+        set u_password=#{u_password}
+        where u_id = #{u_id}
+    </update>
+
+    <delete id="deleteUserByUId">
+        delete
+        from bbs_user_grade
+        where u_id = #{u_id}
+    </delete>
+
+    <update id="updateUserGrade">
+        update bbs_user_grade
+        set u_grade=#{tag}
+        where u_id = #{u_id}
+    </update>
+
+    <update id="updateUserStatus">
+        update bbs_user_grade
+        set u_status=#{tag}
+        where u_id = #{u_id}
+    </update>
 </mapper>

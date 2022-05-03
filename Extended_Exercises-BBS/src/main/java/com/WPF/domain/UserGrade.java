@@ -4,7 +4,7 @@ public class UserGrade {
 	private String u_id;
 	private String u_password;
 	private int u_grade;
-	private int u_state;
+	private int u_status;
 
 	public UserGrade() {
 	}
@@ -14,11 +14,11 @@ public class UserGrade {
 		this.u_password = u_password;
 	}
 
-	public UserGrade(String u_id, String u_password, int u_grade, int u_state) {
+	public UserGrade(String u_id, String u_password, int u_grade, int u_status) {
 		this.u_id = u_id;
 		this.u_password = u_password;
 		this.u_grade = u_grade;
-		this.u_state = u_state;
+		this.u_status = u_status;
 	}
 
 	public String getU_id() {
@@ -45,12 +45,12 @@ public class UserGrade {
 		this.u_grade = u_grade;
 	}
 
-	public int getU_state() {
-		return u_state;
+	public int getU_status() {
+		return u_status;
 	}
 
-	public void setU_state(int u_state) {
-		this.u_state = u_state;
+	public void setU_status(int u_status) {
+		this.u_status = u_status;
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class UserGrade {
 				"u_id='" + u_id + '\'' +
 				", u_password='" + u_password + '\'' +
 				", u_grade=" + u_grade +
-				", u_state=" + u_state +
+				", u_status=" + u_status +
 				'}';
 	}
 }

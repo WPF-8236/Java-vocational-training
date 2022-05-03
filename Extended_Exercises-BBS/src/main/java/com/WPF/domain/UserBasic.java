@@ -7,8 +7,10 @@ public class UserBasic {
 	private String u_age;
 	private String u_introduction;
 	private String u_address;
-
 	private String u_img;
+	private String u_phone;
+	private String u_email;
+
 
 	public UserBasic() {
 	}
@@ -30,6 +32,18 @@ public class UserBasic {
 		this.u_introduction = u_introduction;
 		this.u_address = u_address;
 		this.u_img = u_img;
+	}
+
+	public UserBasic(String u_id, String u_name, String u_gender, String u_age, String u_introduction, String u_address, String u_img, String u_phone, String u_email) {
+		this.u_id = u_id;
+		this.u_name = u_name;
+		this.u_gender = u_gender;
+		this.u_age = u_age;
+		this.u_introduction = u_introduction;
+		this.u_address = u_address;
+		this.u_img = u_img;
+		this.u_phone = u_phone;
+		this.u_email = u_email;
 	}
 
 	public String getU_id() {
@@ -88,6 +102,22 @@ public class UserBasic {
 		this.u_img = u_img;
 	}
 
+	public String getU_phone() {
+		return u_phone;
+	}
+
+	public void setU_phone(String u_phone) {
+		this.u_phone = u_phone;
+	}
+
+	public String getU_email() {
+		return u_email;
+	}
+
+	public void setU_email(String u_email) {
+		this.u_email = u_email;
+	}
+
 	@Override
 	public String toString() {
 		return "UserBasic{" +
@@ -98,6 +128,8 @@ public class UserBasic {
 				", u_introduction='" + u_introduction + '\'' +
 				", u_address='" + u_address + '\'' +
 				", u_img='" + u_img + '\'' +
+				", u_phone='" + u_phone + '\'' +
+				", u_email='" + u_email + '\'' +
 				'}';
 	}
 }

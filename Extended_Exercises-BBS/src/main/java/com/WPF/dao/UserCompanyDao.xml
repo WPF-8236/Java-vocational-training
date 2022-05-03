@@ -21,4 +21,9 @@
         insert into bbs_user_company(u_id, u_company_name, u_company_posts, u_company_industry)
         VALUES (#{u_id}, #{u_company_name}, #{u_company_posts}, #{u_company_industry})
     </insert>
+    <delete id="deleteUserByUId">
+        delete
+        from bbs_user_company
+        where u_id = #{u_id}
+    </delete>
 </mapper>

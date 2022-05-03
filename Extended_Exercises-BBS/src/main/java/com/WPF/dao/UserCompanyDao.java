@@ -9,4 +9,6 @@ public interface UserCompanyDao {
 	int updateUserCompany(UserCompany userCompany);
 
 	int insertUserCompany(UserCompany userCompany);
+	int deleteUserByUId(@Param("u_id") String u_id);
+
 }

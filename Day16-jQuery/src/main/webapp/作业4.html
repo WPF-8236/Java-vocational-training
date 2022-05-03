@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>作业4</title>
+		<script src="js/jquery-3.6.0.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('#bt').click(function() {
+					var name=$('#name').val();
+					var email=$('#email').val();
+					var salary=$('#salary').val();
+					console.log(name)
+					console.log(email)
+					console.log(salary)
+					var table=$('#table');
+					var $node=$('<tr id="bta"><td>'+name+'</td><td>'+email+'</td><td>'+salary+'</td><td><a href="#" onclick="aa();return false;">Delete</a></td></tr>')
+					table.append($node)
+				})
+			})
+			
+			function aa(){
+				$('#bta').remove();
+			}
+		</script>
+		<style type="text/css">
+			#form {
+				width: 200px;
+				height: 200px;
+				border: 1px solid red;
+				margin-top: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<table border="1" id="table">
+			<tr>
+				<th>姓名</th>
+				<th>电子邮箱</th>
+				<th>工资</th>
+				<th>操作</th>
+			</tr>
+		</table>
+		<form id="form">
+			name：<input type="text" id="name" value="">
+			email：<input type="text" id="email" value="">
+			salary：<input type="text" id="salary" value="">
+			<input id="bt" type="button" value="提交" />
+		</form>
+	</body>
+</html>

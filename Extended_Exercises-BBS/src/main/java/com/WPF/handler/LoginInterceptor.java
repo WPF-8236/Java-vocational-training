@@ -29,7 +29,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		UserBasic userBasic = userService.getUserBasicByUId(user_id);
 		HttpSession session = request.getSession();
 		session.setAttribute("userBasic", userBasic);
-		if (userBasic == null && userGrade != null) {
+		if (userBasic == null && userGrade != null && userGrade.getU_grade() != 2) {
 			printWriter.print("\t\t<script>\n" +
 					"\t\t\talert(\"" + "信息不完全请完善信息！！" + "\")\n" +
 					"\t\t</script>");

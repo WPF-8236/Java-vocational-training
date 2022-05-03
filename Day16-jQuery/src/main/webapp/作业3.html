@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>作业3</title>
+		<script src="js/jquery-3.6.0.js"></script>
+		<style type="text/css">
+			#list1 {
+				position: absolute;
+				top: 20px;
+				left: 20px;
+				/* border: 2px solid red; */
+				width: 300px;
+				height: 400px;
+			}
+
+			#list2 {
+				position: absolute;
+				top: 20px;
+				left: 460px;
+				/* border: 2px solid red; */
+				width: 300px;
+				height: 400px;
+			}
+
+			#buttons {
+				position: absolute;
+				top: 150px;
+				left: 330px;
+				width: 120px;
+				height: 100px;
+			}
+
+			ul li button {
+				width: 120px;
+				margin-bottom: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="list1">
+			<select name="select1" id="select1" multiple size="20"
+				style="width: 300px;margin-left: 0px;line-height: 25px;height: 384px;">
+				<option value="选项1">选项1</option>
+				<option value="选项2">选项2</option>
+				<option value="选项3">选项3</option>
+				<option value="选项4">选项4</option>
+				<option value="选项5">选项5</option>
+				<option value="选项6">选项6</option>
+				<option value="选项7">选项7</option>
+				<option value="选项8">选项8</option>
+			</select>
+		</div>
+		<div id="buttons">
+			<ul style="list-style: none;;position: relative;top: 0px;left: 0px;margin: 0px;padding: 0px;">
+				<li><button id="bt1">选中添加到右边</button></li>
+				<li><button id="bt2">选中添加到左边</button></li>
+				<li><button id="bt3">全部添加到右边</button></li>
+				<li><button id="bt4">全部添加到左边</button></li>
+			</ul>
+		</div>
+		<div id="list2">
+			<select name="select2" id="select2" multiple size="20"
+				style="width: 300px;margin-left: 0px;line-height: 25px;height: 384px;">
+				<option value="选项1">选项9</option>
+				<option value="选项2">选项10</option>
+				<option value="选项3">选项11</option>
+				<option value="选项4">选项12</option>
+				<option value="选项5">选项13</option>
+				<option value="选项6">选项14</option>
+				<option value="选项7">选项15</option>
+				<option value="选项8">选项16</option>
+			</select>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	var letfSelect = $("#select1");
+	var rightSelect = $("#select2");
+	var leftOptions = letfSelect.children('option');
+	var rightOptions = rightSelect.children('option');
+
+	function oneToRight() {
+		$.each(leftOptions, function(i, e) {
+			// console.log(leftOptions[i])
+			if (leftOptions[i].selected == true) {
+				var leftOption = leftOptions[i];
+				leftOption.selected = false;
+				// var removeOptin = leftOption.remove();
+				rightSelect.append(leftOption);
+			}
+		})
+	}
+
+	function oneToLeft() {
+		$.each(rightOptions, function(i, e) {
+			// console.log(leftOptions[i])
+			if (rightOptions[i].selected == true) {
+				var rightOption = rightOptions[i];
+				rightOption.selected = false;
+				// var removeOptin = $(rightOption).remove();
+				// console.log(removeOptin)
+				letfSelect.append(rightOption);
+			}
+		})
+	}
+
+	function allToLeft() {
+		letfSelect.append(rightOptions);
+	}
+
+	function allToRight() {
+		rightSelect.append(leftOptions);
+	}
+
+	function flush() {
+		letfSelect = $("#select1");
+		rightSelect = $("#select2");
+		leftOptions = letfSelect.children('option');
+		rightOptions = rightSelect.children('option');
+	}
+
+	$(function() {
+
+		$('#bt1').click(function() {
+			flush();
+			oneToRight()
+		})
+		$('#bt2').click(function() {
+			flush();
+			oneToLeft()
+		})
+		$('#bt3').click(function() {
+			flush();
+			allToRight()
+		})
+		$('#bt4').click(function() {
+			flush();
+			allToLeft()
+		})
+	})
+</script>

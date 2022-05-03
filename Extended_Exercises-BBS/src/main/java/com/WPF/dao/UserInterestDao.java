@@ -13,4 +13,6 @@ public interface UserInterestDao {
 	int deleteUserInterestByUInterestId(@Param("u_interest_id") String u_interest_id);
 
 	int insertUserInterest(UserInterest userInterest);
+	int deleteUserByUId(@Param("u_id") String u_id);
+
 }

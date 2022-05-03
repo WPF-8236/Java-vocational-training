@@ -189,7 +189,7 @@ a:focus {
 
 #personal_information {
     background: white;
-    height: 1200px;
+    height: 1300px;
     width: 1000px;
     margin: 0 auto;
 }
@@ -258,6 +258,90 @@ a:focus {
     margin: 0 auto;
 }
 
+#account_settings_div {
+    padding: 16px;
+}
+
 #account_settings_div1 {
-padding: 16px;
+    padding: 16px;
+    border-bottom: 2px solid gray;
+}
+
+#account_settings_div2 {
+    padding: 16px;
+    border-bottom: 2px solid gray;
+}
+
+#account_settings_div3 {
+    padding: 16px;
+    border-bottom: 2px solid gray;
+}
+
+#account_settings_div4 {
+    padding: 16px;
+    border-bottom: 2px solid gray;
+}
+
+#account_settings_div1 .bg-purple-light {
+    text-align: right;
+}
+
+#account_settings_div2 .bg-purple-light {
+    text-align: right;
+}
+
+#account_settings_div3 .bg-purple-light {
+    text-align: right;
+}
+
+#account_settings_div4 .bg-purple-light {
+    text-align: right;
+}
+
+#content_management {
+    background: white;
+    height: 100%;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+#addPlate_addButton {
+    text-align: center;
+}
+
+#addPost_addButton {
+    text-align: center;
+}
+
+#plate_manage {
+    background: white;
+    height: 100%;
+    width: 1300px;
+    margin: 0 auto;
+}
+
+#addPlate_addButton {
+    text-align: center;
+    padding: 10px;
+}
+
+#addPlate_addPanel_drawer {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#plate_list {
+    padding: 16px;
+}
+
+#plate_list_drawer {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.block {
+    width: 30%;
+    margin: 0 auto;
 }

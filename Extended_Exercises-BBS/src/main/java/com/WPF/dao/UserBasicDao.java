@@ -11,4 +11,12 @@ public interface UserBasicDao {
 	int insertUserBasic(UserBasic userBasic);
 
 	void updateUserBasicUImg(UserBasic userBasic);
+
+	int updateUserPhone(@Param("u_id") String u_id, @Param("u_phone") String u_phone);
+
+	int updateUserEmail(@Param("u_id") String u_id, @Param("u_email") String u_email);
+
+	int deleteUserByUId(@Param("u_id") String u_id);
+
+	int updateUserName(@Param("u_id") String u_id, @Param("u_name") String u_name);
 }

@@ -1,13 +1,7 @@
 package com.WPF.service.impl;
 
-import com.WPF.dao.UserBasicDao;
-import com.WPF.dao.UserCompanyDao;
-import com.WPF.dao.UserInterestDao;
-import com.WPF.dao.UserSchoolDao;
-import com.WPF.domain.UserBasic;
-import com.WPF.domain.UserCompany;
-import com.WPF.domain.UserInterest;
-import com.WPF.domain.UserSchool;
+import com.WPF.dao.*;
+import com.WPF.domain.*;
 import com.WPF.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +23,12 @@ public class UserServiceImpl implements UserService {
 
 	@Resource
 	private UserInterestDao userInterestDao;
+
+	@Resource
+	private UserGradeDao userGradeDao;
+
+	@Resource
+	private PlateDao plateDao;
 
 	@Override
 	public UserBasic getUserBasicByUId(String u_id) {
@@ -90,5 +90,34 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int deleteUserInterestByUInterestId(String u_interest_id) {
 		return userInterestDao.deleteUserInterestByUInterestId(u_interest_id);
+	}
+
+	@Override
+	public int updateUserPassword(String u_id, String u_password) {
+		return userGradeDao.updateUserPassword(u_id, u_password);
+	}
+
+	@Override
+	public int updateUserPhone(String u_id, String u_phone) {
+		return userBasicDao.updateUserPhone(u_id, u_phone);
+	}
+
+	public int updateUserEmail(String u_id, String u_email) {
+		return userBasicDao.updateUserEmail(u_id, u_email);
+	}
+
+	@Override
+	public int deleteUserByUId(String u_id) {
+		return userBasicDao.deleteUserByUId(u_id) * userGradeDao.deleteUserByUId(u_id) * userInterestDao.deleteUserByUId(u_id) * userCompanyDao.deleteUserByUId(u_id) * userSchoolDao.deleteUserByUId(u_id);
+	}
+
+	@Override
+	public List<Plate> getPlateListByUId(String u_id) {
+		return plateDao.getPlateListByUId(u_id);
+	}
+
+	@Override
+	public int addAPlate(Plate plate) {
+		return plateDao.insertAPlate(plate);
 	}
 }

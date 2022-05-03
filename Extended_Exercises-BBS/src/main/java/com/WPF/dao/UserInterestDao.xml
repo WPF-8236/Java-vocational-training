@@ -26,4 +26,9 @@
         insert into bbs_user_interest(u_id, u_interest_id, u_interest, u_interest_dislike)
         VALUES (#{u_id}, #{u_interest_id}, #{u_interest}, #{u_interest_dislike})
     </insert>
+    <delete id="deleteUserByUId">
+        delete
+        from bbs_user_interest
+        where u_id = #{u_id}
+    </delete>
 </mapper>

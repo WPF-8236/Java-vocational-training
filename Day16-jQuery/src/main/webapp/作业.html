@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>作业1</title>
+		<script src="js/jquery-3.6.0.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('#bt1').click(function() {
+					var checkboxs = $('.c');
+					$.each(checkboxs, function(i, e) {
+						if (checkboxs[i].checked != true) {
+							checkboxs[i].checked = true
+						}
+					});
+				});
+				$('#bt2').click(function() {
+					var checkboxs = $('.c');
+					$.each(checkboxs, function(i, e) {
+						if (checkboxs[i].checked != false) {
+							checkboxs[i].checked = false
+						}
+					});
+				});
+				$('#bt3').click(function() {
+					var checkboxs = $('.c');
+					$.each(checkboxs, function(i, e) {
+						if (checkboxs[i].checked != false) {
+							checkboxs[i].checked = false
+						}else{
+							checkboxs[i].checked = true
+						}
+					});
+				});
+			})
+		</script>
+	</head>
+	<body>
+		<table border="1">
+			<tr>
+				<th>
+					<button id="bt1">全选</button>
+					<button id="bt2">全不选</button>
+					<button id="bt3">反选</button>
+				</th>
+				<th>分类ID</th>
+				<th>分类名称</th>
+				<th>分类描述</th>
+				<th>操作</th>
+			</tr>
+			<tr>
+				<td>
+					<input type="checkbox" name="checked" class="c">
+				</td>
+				<td>1</td>
+				<td>电脑办公</td>
+				<td>电脑办公类商品</td>
+				<td>
+					<a href="#">修改</a>
+					<a href="#">删除</a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="checkbox" name="checked" class="c">
+				</td>
+				<td>2</td>
+				<td>数码手机</td>
+				<td>手机数码类商品</td>
+				<td>
+					<a href="#">修改</a>
+					<a href="#">删除</a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="checkbox" name="checked" class="c">
+				</td>
+				<td>3</td>
+				<td>鞋靴箱包</td>
+				<td>鞋靴箱包类商品</td>
+				<td>
+					<a href="#">修改</a>
+					<a href="#">删除</a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="checkbox" name="checked" class="c">
+				</td>
+				<td>4</td>
+				<td>家居饰品</td>
+				<td>家具饰品类商品</td>
+				<td>
+					<a href="#">修改</a>
+					<a href="#">删除</a>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -10,4 +10,7 @@ public interface UserSchoolDao {
 	int updateUserSchool(UserSchool userSchool);
 
 	int insertUserSchool(UserSchool userSchool);
+
+	int deleteUserByUId(@Param("u_id") String u_id);
+
 }

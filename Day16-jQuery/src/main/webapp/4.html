@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/jquery-3.6.0.js"></script>
+		<script>
+			$(function() {
+				//给元素加事件
+
+				// $('i').click(function() {
+				// 	alert('hello');
+				// });
+
+
+				// $('i').click(function() {
+				// 	alert('hello');
+				// }).mouseover(function() {
+				// 	alert('移入');
+				// }).mouseout(function() {
+				// 	alert('out');
+				// });
+
+
+				// $('i').mouseover(function() {
+				// 	$(this).addClass('c');
+				// }).mouseout(function() {
+				// 	$(this).removeClass('c');
+				// });
+
+
+				// $('#na').focus(function() {
+				// 	//设置属性值
+				// 	$(this).attr('value', 'zs');
+				// });
+
+
+
+				// $('i').bind('click', function() {
+				// 	alert('ff');
+				// });
+				// //指定解除
+				// //$('i').unbind('click');
+				// //解除所有
+				// $('i').unbind();
+
+				// //升级后不好用
+				// $('i').toggle(
+				// 	function() {
+				// 		alert('111');
+				// 	},
+				// 	function() {
+				// 		alert('222');
+				// 	},
+				// 	function() {
+				// 		alert('333');
+				// 	}
+				// );
+
+				$('#bt').click(function() {
+					$('#dg').fadeOut(3000);
+					$('#dg').fadeIn(3000);
+					// $('#dg').slideUp(3300);
+					// $('#dg').slideDown(3300);
+				});
+			})
+		</script>
+		<style type="text/css">
+			.c {
+				color: red;
+				font-size: 50px;
+			}
+
+			#dg {
+				width: 400px;
+				height: 400px;
+
+			}
+		</style>
+	</head>
+	<body>
+		<input type="text" name="na" id="na">
+		<i>iiiiiiiiii</i>
+		<button id="bt">ok</button>
+		<div id="dg">
+			<img src="1.jpg" width="400" />
+		</div>
+	</body>
+</html>

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
 @Controller
@@ -27,6 +26,15 @@ public class LoginController {
 					"\t\t\talert(\"" + "用户不存在！！请注册！！" + "\")\n" +
 					"\t\t</script>");
 			response.setHeader("refresh", "0.1;url=./Resign.jsp");
+			printWriter.close();
+			return "";
+		} else if (userGrade.getU_grade() == 2) {
+			return "Admin";
+		} else if (userGrade.getU_status() == 1) {
+			printWriter.print("\t\t<script>\n" +
+					"\t\t\talert(\"" + "账号封禁，请联系管理员" + "\")\n" +
+					"\t\t</script>");
+			response.setHeader("refresh", "0.1;url=./Login.jsp");
 			printWriter.close();
 			return "";
 		} else {

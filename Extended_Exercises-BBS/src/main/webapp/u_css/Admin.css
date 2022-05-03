@@ -1,0 +1,173 @@
+.el-header, .el-footer {
+    background-color: #B3C0D1;
+    color: #333;
+    height: 60px;
+}
+
+.el-aside {
+    /*background-color: #D3DCE6;*/
+    color: #333;
+    height: 1020px;
+    width: 300px;
+    text-align: center;
+}
+
+.el-main {
+    background-color: #E9EEF3;
+    color: #333;
+    height: 960px;
+}
+
+.param {
+    display: none;
+}
+
+#header-title {
+    border: 2px solid white;
+    width: 200px;
+    height: 50px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    color: #ffffff;
+    font-size: 28px;
+    padding: 4px 25px;
+    background-image: url("../img/index_bg.jfif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: 50%;
+}
+
+#header-logout {
+    border: 2px solid white;
+    width: 120px;
+    height: 50px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #ffffff;
+    font-size: 28px;
+    padding: 4px 25px;
+    background-image: url("../img/index_bg.jfif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: 50%;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+a:focus {
+    text-decoration: none;
+}
+
+
+#search .el-select .el-input {
+    width: 130px;
+}
+
+.input-with-select .el-input-group__prepend {
+    background-color: #fff;
+}
+
+.el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+}
+
+.el-icon-arrow-down {
+    font-size: 12px;
+}
+
+.demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.el-dropdown-menu__item {
+    text-align: center;
+}
+
+#el-footer-detial {
+    color: #ffffff;
+    text-align: center;
+    font-size: 30px;
+}
+
+#search {
+    width: 600px;
+    margin-left: 300px;
+    padding-top: 10px;
+}
+
+#user_controller {
+    background: white;
+    height: 100%;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+#user_controller_userList {
+    padding: 16px;
+}
+
+.block {
+    width: 30%;
+    margin: 0 auto;
+}
+
+#updateUser {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#plate_manage {
+    background: white;
+    height: 100%;
+    width: 1300px;
+    margin: 0 auto;
+}
+
+#addPlate_addButton {
+    text-align: center;
+    padding: 10px;
+}
+
+#addPlate_addPanel_drawer {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#plate_list {
+    padding: 16px;
+}
+
+#plate_list_drawer {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+

@@ -103,6 +103,46 @@
                 })
             }
 
+            function getPlateListByUId() {
+                $.ajax({
+                    url: "user/getPlateListByUId",
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: "json",
+                    data: {"u_id": JSON.stringify(document.getElementById("u_id").textContent)},
+                    success: function (reps) {
+                        console.log(reps)
+                        app.plateList = reps;
+                        app.plateListPage.total = app.plateList.length;
+                    },
+                    error: function () {
+                        alert('板块列表获取失败');
+                    }
+                })
+            }
+
+            function addAPlate() {
+                app.addPlate.p_u_id = document.getElementById("u_id").textContent;
+                console.log(app.addPlate);
+                $.ajax({
+                    url: "user/addAPlate",
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: "json",
+                    data: {
+                        "addPlate": JSON.stringify(app.addPlate),
+                    },
+                    success: function (reps) {
+                        alert(reps.valueOf());
+                        getPlateListByUId();
+                        app.itemKey = Math.random();
+                        app.addPlateDrawer = false
+                        app.addPlate = ''
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                })
+            }
+
             function putChangeUserBasic() {
                 app.changeUserBasic.u_id = document.getElementById("u_id").textContent;
                 console.log(app.changeUserBasic);
@@ -206,6 +246,145 @@
                 })
             }
 
+            function putChangeUPassword() {
+                console.log(app.u_password.checkPass)
+                $.ajax({
+                    url: "user/putChangeUPassword",
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: "json",
+                    data: {
+                        "u_password": JSON.stringify(app.u_password.checkPass),
+                        "u_id": JSON.stringify(document.getElementById("u_id").textContent)
+                    },
+                    success: function (reps) {
+                        alert(reps.valueOf());
+                        window.location.href = './logout.jsp'
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                })
+            }
+
+            function updateAPlate() {
+                console.log(app.changePlate)
+                $.ajax({
+                    url: "user/updateAPlate",
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: "json",
+                    data: {
+                        "changePlate": JSON.stringify(app.changePlate)
+                    },
+                    success: function (reps) {
+                        alert(reps.valueOf());
+                        getPlateListByUId();
+                        app.itemKey = Math.random();
+                        app.changePlateDrawer = false
+                        app.changePlate = ''
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                })
+            }
+
+            function putUserPhone() {
+                console.log(app.changeUserBasic.u_phone)
+                $.ajax({
+                    url: "user/putUserPhone",
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: "json",
+                    data: {
+                        "u_phone": JSON.stringify(app.changeUserBasic.u_phone),
+                        "u_id": JSON.stringify(document.getElementById("u_id").textContent)
+                    },
+                    success: function (reps) {
+                        alert(reps.valueOf());
+                        window.location.href = './UserCenter.jsp'
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                })
+            }
+
+            function putUserEmail() {
+                console.log(app.changeUserBasic.u_email)
+                $.ajax({
+                    url: "user/putUserEmail",
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: "json",
+                    data: {
+                        "u_email": JSON.stringify(app.changeUserBasic.u_email),
+                        "u_id": JSON.stringify(document.getElementById("u_id").textContent)
+                    },
+                    success: function (reps) {
+                        alert(reps.valueOf());
+                        window.location.href = './UserCenter.jsp'
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                })
+            }
+
+            function deleteUser() {
+                console.log(document.getElementById("u_id").textContent)
+                $.ajax({
+                    url: "user/deleteUser",
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: "json",
+                    data: {"u_id": JSON.stringify(document.getElementById("u_id").textContent)},
+                    success: function (reps) {
+                        alert(reps.valueOf());
+                        window.location.href = './logout.jsp'
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                })
+            }
+
+            function removePlate(p_id) {
+                console.log(p_id)
+                $.ajax({
+                    url: "admin/removePlate",
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: "json",
+                    data: {
+                        "p_id": JSON.stringify(p_id),
+                    },
+                    success: function (reps) {
+                        alert(reps.valueOf());
+                        getPlateListByUId();
+                        app.itemKey = Math.random();
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                })
+            }
+
+            function changePStatus(p_id, tag) {
+                $.ajax({
+                    url: "admin/changePStatus",
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: "json",
+                    data: {
+                        "p_id": JSON.stringify(p_id),
+                        "tag": JSON.stringify(tag)
+                    },
+                    success: function (reps) {
+                        alert(reps.valueOf());
+                        getPlateListByUId();
+                        app.itemKey = Math.random();
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                })
+            }
+
         </script>
     </head>
     <body>
@@ -243,7 +422,17 @@
                             <div id="nav-ul-img">
                                 <a href="#news">
                                     <el-dropdown @command="handleCommand">
+                                        <%
+                                            if (userBasic != null) {
+                                        %>
                                         <el-avatar :size="50" src="<%=userBasic.getU_img()%>"></el-avatar>
+                                        <%
+                                        } else {
+                                        %>
+                                        <el-avatar :size="50" src=""></el-avatar>
+                                        <%
+                                            }
+                                        %>
                                         <el-dropdown-menu slot="dropdown" style="width: 300px">
                                             <span>?</span>
                                             <el-dropdown-item icon="el-icon-plus" command="a">黄金糕</el-dropdown-item>
@@ -251,6 +440,10 @@
                                             <el-dropdown-item icon="el-icon-circle-plus-outline">螺蛳粉</el-dropdown-item>
                                             <el-dropdown-item icon="el-icon-check">双皮奶</el-dropdown-item>
                                             <el-dropdown-item icon="el-icon-circle-check">蚵仔煎</el-dropdown-item>
+                                            <el-divider></el-divider>
+                                            <el-dropdown-item icon="el-icon-circle-check"
+                                                              onclick="window.location.href='logout.jsp'">登出
+                                            </el-dropdown-item>
                                         </el-dropdown-menu>
                                     </el-dropdown>
                                 </a>
@@ -280,15 +473,12 @@
                                         <span slot="title">账号设置</span>
                                     </el-menu-item>
                                     <el-menu-item index="3">
-                                        <span slot="title">隐私设置</span>
-                                    </el-menu-item>
-                                    <el-menu-item index="4">
                                         <span slot="title">我的收藏</span>
                                     </el-menu-item>
-                                    <el-menu-item index="5">
+                                    <el-menu-item index="4">
                                         <span slot="title">浏览历史</span>
                                     </el-menu-item>
-                                    <el-menu-item index="6">
+                                    <el-menu-item index="5">
                                         <span slot="title">内容管理</span>
                                     </el-menu-item>
 
@@ -303,7 +493,17 @@
                                     <div id="personal_information_div1">
                                         <div id="personal_information_div1_img">
                                             <el-button type="text" @click="dialogFormVisible = true">
+                                                <%
+                                                    if (userBasic != null) {
+                                                %>
                                                 <el-avatar :size="92" src="<%=userBasic.getU_img()%>"></el-avatar>
+                                                <%
+                                                } else {
+                                                %>
+                                                <el-avatar :size="92" src=""></el-avatar>
+                                                <%
+                                                    }
+                                                %>
                                             </el-button>
                                             <el-dialog title="上传头像" :visible.sync="dialogFormVisible">
                                                 <form action="user/fileupload" method="post"
@@ -361,6 +561,11 @@
                                                     {{userBasic.u_address}}
                                                 </el-descriptions-item>
                                                 <el-descriptions-item>
+                                                    <template slot="label">
+                                                        <i class="el-icon-location-outline"></i>
+                                                        用户等级
+                                                    </template>
+                                                    {{userGrade.u_grade|uGradeFilter}}
                                                 </el-descriptions-item>
                                                 <el-descriptions-item>
                                                     <template slot="label">
@@ -708,76 +913,314 @@
                             </div>
                             <div v-show="index==2">
                                 <div id="account_settings">
-                                    <div id="account_settings_div1">
-                                        <el-descriptions class="margin-top" title="账号设置"
-                                                         :column="1" border>
-                                            <el-descriptions-item>
-                                                <template slot="label">
-                                                    <i class="el-icon-user"></i>
-                                                    感兴趣
-                                                </template>
-                                                <el-tag
-                                                        :key="tag"
-                                                        v-for="tag in likeTags"
-                                                        closable
-                                                        :disable-transitions="false"
-                                                        @close="likeTagHandleClose(tag)">
-                                                    {{tag.u_interest}}
-                                                </el-tag>
-                                                <spna style="margin-left: 10px">
-                                                    <el-input
-                                                            class="input-new-tag"
-                                                            v-if="likeInputVisible"
-                                                            v-model="likeInputValue"
-                                                            ref="likeSaveTagInput"
-                                                            size="small"
-                                                            @keyup.enter.native="likeTagHandleInputConfirm"
-                                                            @blur="likeTagHandleInputConfirm"
-                                                    >
-                                                    </el-input>
-                                                    <el-button v-else class="button-new-tag" size="small"
-                                                               @click="likeTagShowInput">+ New Tag
-                                                    </el-button>
-                                                </spna>
-                                            </el-descriptions-item>
-                                            <el-descriptions-item>
-                                                <template slot="label">
-                                                    <i class="el-icon-user"></i>
-                                                    不感兴趣
-                                                </template>
-                                                <el-tag
-                                                        :key="tag"
-                                                        v-for="tag in dislikeTags"
-                                                        closable
-                                                        :disable-transitions="false"
-                                                        @close="dislikeTagHandleClose(tag)">
-                                                    {{tag.u_interest}}
-                                                </el-tag>
-                                                <spna style="margin-left: 10px">
-                                                    <el-input
-                                                            class="input-new-tag"
-                                                            v-if="dislikeInputVisible"
-                                                            v-model="dislikeInputValue"
-                                                            ref="dislikeSaveTagInput"
-                                                            size="small"
-                                                            @keyup.enter.native="dislikeTagHandleInputConfirm"
-                                                            @blur="dislikeTagHandleInputConfirm"
-                                                    >
-                                                    </el-input>
-                                                    <el-button v-else class="button-new-tag" size="small"
-                                                               @click="dislikeTagShowInput">+ New Tag
-                                                    </el-button>
-                                                </spna>
-                                            </el-descriptions-item>
-                                        </el-descriptions>
+                                    <div id="account_settings_div">
+                                        <span style="font-size: 16px;font-weight: 700">账号信息</span>
+                                        <div style="margin-bottom: 20px"></div>
+                                        <div id="account_settings_div1">
+                                            <el-row>
+                                                <el-col :span="12">
+                                                    <div class="grid-content bg-purple">密码</div>
+                                                </el-col>
+                                                <el-col :span="12">
+                                                    <div class="grid-content bg-purple-light">
+                                                        <span style="margin-right: 20px">存在风险，请设置密码</span>
+                                                        <el-popover
+                                                                placement="right"
+                                                                width="400"
+                                                                trigger="click">
+                                                            <el-form :model="u_password" status-icon
+                                                                     :rules="u_password_rules"
+                                                                     ref="u_password" label-width="100px"
+                                                                     class="demo-ruleForm">
+                                                                <el-form-item label="密码" prop="pass">
+                                                                    <el-input type="password" v-model="u_password.pass"
+                                                                              autocomplete="off"></el-input>
+                                                                </el-form-item>
+                                                                <el-form-item label="确认密码" prop="checkPass">
+                                                                    <el-input type="password"
+                                                                              v-model="u_password.checkPass"
+                                                                              autocomplete="off"></el-input>
+                                                                </el-form-item>
+                                                                <el-form-item>
+                                                                    <el-button type="primary"
+                                                                               @click="u_password_submitForm('u_password')">
+                                                                        提交
+                                                                    </el-button>
+                                                                    <el-button
+                                                                            @click="resetForm('u_password')">
+                                                                        重置
+                                                                    </el-button>
+                                                                </el-form-item>
+                                                            </el-form>
+                                                            <el-button slot="reference">修改密码</el-button>
+                                                        </el-popover>
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                        </div>
+                                        <div id="account_settings_div2">
+                                            <el-row>
+                                                <el-col :span="12">
+                                                    <div class="grid-content bg-purple">手机</div>
+                                                </el-col>
+                                                <el-col :span="12">
+                                                    <div class="grid-content bg-purple-light">
+                                                        <span style="margin-right: 20px">{{userBasic.u_phone}}</span>
+                                                        <el-popover
+                                                                placement="right"
+                                                                width="400"
+                                                                trigger="click">
+                                                            <el-form :model="changeUserBasic" status-icon
+                                                                     ref="changeUserBasic" label-width="100px"
+                                                                     class="demo-ruleForm">
+                                                                <el-form-item label="手机">
+                                                                    <el-input
+                                                                            v-model="changeUserBasic.u_phone"></el-input>
+                                                                </el-form-item>
+                                                                <el-form-item>
+                                                                    <el-button type="primary"
+                                                                               @click="putUserPhone()">
+                                                                        提交
+                                                                    </el-button>
+                                                                </el-form-item>
+                                                            </el-form>
+                                                            <el-button slot="reference">修改手机</el-button>
+                                                        </el-popover>
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                        </div>
+                                        <div id="account_settings_div3">
+                                            <el-row>
+                                                <el-col :span="12">
+                                                    <div class="grid-content bg-purple">邮箱</div>
+                                                </el-col>
+                                                <el-col :span="12">
+                                                    <div class="grid-content bg-purple-light">
+                                                        <span style="margin-right: 20px">{{userBasic.u_email}}</span>
+                                                        <el-popover
+                                                                placement="right"
+                                                                width="400"
+                                                                trigger="click">
+                                                            <el-form :model="changeUserBasic" status-icon
+                                                                     ref="changeUserBasic" label-width="100px"
+                                                                     class="demo-ruleForm">
+                                                                <el-form-item label="邮箱">
+                                                                    <el-input
+                                                                            v-model="changeUserBasic.u_email"></el-input>
+                                                                </el-form-item>
+                                                                <el-form-item>
+                                                                    <el-button type="primary"
+                                                                               @click="putUserEmail()">
+                                                                        提交
+                                                                    </el-button>
+                                                                </el-form-item>
+                                                            </el-form>
+                                                            <el-button slot="reference">修改邮箱</el-button>
+                                                        </el-popover>
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                        </div>
+                                        <div id="account_settings_div4">
+                                            <el-row>
+                                                <el-col :span="12">
+                                                    <div class="grid-content bg-purple">账号注销</div>
+                                                </el-col>
+                                                <el-col :span="12">
+                                                    <div class="grid-content bg-purple-light">
+                                                        <el-popconfirm
+                                                                confirm-button-text='好的'
+                                                                cancel-button-text='不用了'
+                                                                icon="el-icon-info"
+                                                                icon-color="red"
+                                                                @confirm="deleteUser()"
+                                                                title="确定要注销账号吗？"
+                                                        >
+                                                            <el-button slot="reference">注销账号</el-button>
+                                                        </el-popconfirm>
+                                                    </div>
+                                                </el-col>
+                                            </el-row>
+                                        </div>
                                     </div>
-
                                 </div>
                             </div>
                             <div v-show="index==3">3</div>
                             <div v-show="index==4">4</div>
-                            <div v-show="index==5">5</div>
-                            <div v-show="index==6">6</div>
+                            <div v-show="index==5">
+                                <div id="content_management">
+                                    <el-tabs type="border-card">
+                                        <el-tab-pane label="帖子">
+                                            <div id="post_manage">
+                                                <div id="addPost_addButton">
+                                                    <el-button type="primary" onclick="">添加帖子</el-button>
+                                                    <div id="addPost_addPanel">
+
+                                                    </div>
+                                                </div>
+                                                <div id="post_list">
+
+                                                </div>
+                                            </div>
+                                        </el-tab-pane>
+                                        <el-tab-pane label="板块" <%if (userGrade.getU_grade() == 0){%>disabled<%}%>>
+                                            <div id="plate_manage">
+                                                <div id="addPlate">
+                                                    <div id="addPlate_addButton">
+                                                        <el-button type="primary" onclick="app.addPlateDrawer=true">
+                                                            添加板块
+                                                        </el-button>
+                                                    </div>
+                                                    <div id="addPlate_addPanel">
+                                                        <el-drawer
+                                                                title="添加板块"
+                                                                :visible.sync="addPlateDrawer"
+                                                                :direction="direction">
+                                                            <div id="addPlate_addPanel_drawer">
+                                                                <el-form :label-position="labelPosition"
+                                                                         label-width="100px"
+                                                                         :model="addPlate">
+                                                                    <el-form-item label="板块名称">
+                                                                        <el-input v-model="addPlate.p_name"
+                                                                                  placeholder="请输入内容"></el-input>
+                                                                    </el-form-item>
+                                                                    <el-form-item label="板块描述">
+                                                                        <el-input type="textarea"
+                                                                                  placeholder="请输入内容"
+                                                                                  maxlength="30"
+                                                                                  show-word-limit
+                                                                                  v-model="addPlate.p_description"></el-input>
+                                                                    </el-form-item>
+                                                                    <el-button type="primary" @click="addAPlate">添加板块
+                                                                    </el-button>
+                                                                </el-form>
+                                                            </div>
+                                                        </el-drawer>
+                                                    </div>
+                                                </div>
+                                                <div id="plate_list">
+                                                    <el-table
+                                                            ref="plateList"
+                                                            :data="plateList.slice((plateListPage.currentPage-1)*plateListPage.pageSize,plateListPage.currentPage*plateListPage.pageSize)"
+                                                            :key="itemKey">
+                                                        <el-table-column
+                                                                type="index"
+                                                                width="50">
+                                                        </el-table-column>
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="p_name"
+                                                                label="板块名称"
+                                                                width="120">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                label="版主昵称"
+                                                                width="120">
+                                                            {{userBasic.u_name}}
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="p_p_count"
+                                                                label="板块帖子数目"
+                                                                width="120">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="p_comment_count"
+                                                                label="板块评论数目"
+                                                                width="120">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="p_description"
+                                                                label="板块描述"
+                                                                width="300">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="p_status"
+                                                                label="板块状态"
+                                                                width="100"
+                                                                :filters="[{ text: '正常', value: '0' }, { text: '封禁', value: '1' },{ text: '审核', value: '2' }]"
+                                                                :filter-method="plateListFilterPStatus"
+                                                                filter-placement="bottom-end">
+                                                            <template slot-scope="scope">
+                                                                <el-tag
+                                                                        :type="scope.row.p_status == '0' ? 'success' : 'danger'"
+                                                                        disable-transitions>
+                                                                    {{scope.row.p_status|statusFormatter}}
+                                                                </el-tag>
+                                                            </template>
+                                                        </el-table-column>
+                                                        <el-table-column label="状态操作" width="100">
+                                                            <template slot-scope="scope">
+                                                                <el-button
+                                                                        v-if="scope.row.p_status==1"
+                                                                        size="mini"
+                                                                        @click="p_statusUnlock(scope.$index, scope.row)">
+                                                                    解禁
+                                                                </el-button>
+                                                                <el-button
+                                                                        v-else-if="scope.row.p_status==0"
+                                                                        size="mini"
+                                                                        type="danger"
+                                                                        @click="p_statusClock(scope.$index, scope.row)">
+                                                                    封禁
+                                                                </el-button>
+                                                            </template>
+                                                        </el-table-column>
+                                                        <el-table-column label="操作">
+                                                            <template slot-scope="scope" width="100">
+                                                                <el-button
+                                                                        size="mini"
+                                                                        @click="app.changePlateDrawer=true;app.changePlate=scope.row">
+                                                                    编辑
+                                                                </el-button>
+                                                                <el-button
+                                                                        size="mini"
+                                                                        type="danger"
+                                                                        @click="removePlate(scope.row.p_id)">删除
+                                                                </el-button>
+                                                            </template>
+                                                        </el-table-column>
+                                                    </el-table>
+                                                    <el-drawer
+                                                            title="修改板块"
+                                                            :visible.sync="changePlateDrawer"
+                                                            :direction="direction">
+                                                        <div id="plate_list_drawer">
+                                                            <el-form :label-position="labelPosition" label-width="100px"
+                                                                     :model="changePlate">
+                                                                <el-form-item label="板块名称">
+                                                                    <el-input v-model="changePlate.p_name"
+                                                                              placeholder="请输入内容"></el-input>
+                                                                </el-form-item>
+                                                                <el-form-item label="板块描述">
+                                                                    <el-input type="textarea"
+                                                                              placeholder="请输入内容"
+                                                                              maxlength="30"
+                                                                              show-word-limit
+                                                                              v-model="changePlate.p_description"></el-input>
+                                                                </el-form-item>
+                                                                <el-button type="primary" @click="updateAPlate">修改板块
+                                                                </el-button>
+                                                            </el-form>
+                                                        </div>
+                                                    </el-drawer>
+                                                    <div class="block" style="margin-top:15px;">
+                                                        <el-pagination
+                                                                @size-change="handleSizeChange2"
+                                                                @current-change="handleCurrentChange2"
+                                                                :current-page.sync="plateListPage.currentPage"
+                                                                :page-sizes="[5, 10, 15, 20, 25]"
+                                                                :page-size="plateListPage.pageSize"
+                                                                layout="total, sizes, prev, pager, next, jumper"
+                                                                :total="plateListPage.total">
+                                                        </el-pagination>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </el-tab-pane>
+                                    </el-tabs>
+                                </div>
+                            </div>
                         </el-main>
                         <el-footer>
                             <div id="el-footer-detial">&copy; 2022 培训设计 | Design by 王潘锋</div>
@@ -791,6 +1234,25 @@
         var app = new Vue({
             el: '#app',
             data() {
+                var u_passwordPass = (rule, value, callback) => {
+                    if (value === '') {
+                        callback(new Error('请输入密码'));
+                    } else {
+                        if (this.u_password.checkPass !== '') {
+                            this.$refs.u_password.validateField('checkPass');
+                        }
+                        callback();
+                    }
+                };
+                var u_passwordPass2 = (rule, value, callback) => {
+                    if (value === '') {
+                        callback(new Error('请再次输入密码'));
+                    } else if (value !== this.u_password.pass) {
+                        callback(new Error('两次输入密码不一致!'));
+                    } else {
+                        callback();
+                    }
+                };
                 return {
                     personal_information_div2_el_escription: '0',
                     personal_information_div3_el_escription: '0',
@@ -821,6 +1283,24 @@
                     index: '1',
                     input: '',
                     select: '',
+                    userGrade: {
+                        u_id: <%=userGrade.getU_id()%>,
+                        u_password: <%=userGrade.getU_password()%>,
+                        u_grade: <%=userGrade.getU_grade()%>,
+                        u_status: <%=userGrade.getU_status()%>,
+                    },
+                    u_password: {
+                        pass: '',
+                        checkPass: '',
+                    },
+                    u_password_rules: {
+                        pass: [
+                            {validator: u_passwordPass, trigger: 'blur'}
+                        ],
+                        checkPass: [
+                            {validator: u_passwordPass2, trigger: 'blur'}
+                        ],
+                    },
                     userBasic: {
                         u_id: '',
                         u_name: '',
@@ -828,6 +1308,8 @@
                         u_age: '',
                         u_introduction: '',
                         u_address: '',
+                        u_phone: '',
+                        u_email: '',
                     },
                     changeUserBasic: {
                         u_id: '',
@@ -836,6 +1318,8 @@
                         u_age: '',
                         u_introduction: '',
                         u_address: '',
+                        u_phone: '',
+                        u_email: '',
                     },
                     userSchool: {
                         u_id: '',
@@ -876,6 +1360,72 @@
                         value: '秘密',
                         label: '秘密'
                     },],
+                    addPost: {
+                        p_title: '',
+                        p_content: '',
+                        p_u_id: '',
+                        p_p_id: '',
+                        p_tag: '',
+                    },
+                    addPlate: {
+                        p_id: '',
+                        p_name: '',
+                        p_p_count: '',
+                        p_comment_count: '',
+                        p_description: '',
+                        p_u_id: '',
+                    },
+                    plateList: [{
+                        p_id: '',
+                        p_name: '',
+                        p_p_count: '',
+                        p_comment_count: '',
+                        p_description: '',
+                        p_u_id: '',
+                        p_status: '',
+                    },],
+                    postList: [{
+                        p_id: '',
+                        p_title: '',
+                        p_content: '',
+                        p_comment_count: '',
+                        p_status: '',
+                        p_time: '',
+                        p_u_id: '',
+                        p_p_id: '',
+                        p_tag: '',
+                        p_nice: '',
+                        p_browse_count: '',
+                        p_thumbs_count: '',
+                    },],
+                    changePlate: {
+                        p_id: '',
+                        p_name: '',
+                        p_p_count: '',
+                        p_comment_count: '',
+                        p_description: '',
+                        p_u_id: '',
+                        p_status: '',
+                    },
+                    plateListPage: {
+                        currentPage: 1,
+                        total: '',
+                        pageSize: 10,
+                    },
+                    postListPage: {
+                        currentPage: 1,
+                        total: '',
+                        pageSize: 10,
+                    },
+                    direction: 'rtl',
+                    drawer: false,
+                    labelPosition: 'left',
+                    itemKey: 1,
+                    addPlateDrawer: false,
+                    addPostDrawer: false,
+                    changePlateDrawer: false,
+                    changePostDrawer: false,
+
                 }
             },
             filters: {
@@ -885,6 +1435,20 @@
                     M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
                     D = date.getDate() + ' ';
                     return Y + M + D;
+                },
+                uGradeFilter(value) {
+                    if (value === 0)
+                        return '普通用户'
+                    else
+                        return '版主用户'
+                },
+                statusFormatter(value) {
+                    if (value == 0)
+                        return '正常'
+                    else if (value == 1)
+                        return '封禁'
+                    else
+                        return '审核'
                 },
             },
             methods: {
@@ -942,7 +1506,38 @@
                     this.dislikeInputVisible = false;
                     this.dislikeInputValue = '';
                     putDislikeTag();
-                }
+                },
+                u_password_submitForm(formName) {
+                    this.$refs[formName].validate((valid) => {
+                        if (valid) {
+                            putChangeUPassword();
+                        } else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    });
+                },
+                resetForm(formName) {
+                    this.$refs[formName].resetFields();
+                },
+                handleSizeChange2(val) {
+                    console.log(`每页 ${val} 条`);
+                    this.plateListPage.currentPage = 1;
+                    this.plateListPage.pageSize = val;
+                },
+                handleCurrentChange2(val) {
+                    console.log(`当前页: ${val}`);
+                    this.plateListPage.currentPage = val;
+                },
+                plateListFilterPStatus(value, row) {
+                    return row.p_status == value;
+                },
+                p_statusUnlock(index, row) {
+                    changePStatus(row.p_id, 0);
+                },
+                p_statusClock(index, row) {
+                    changePStatus(row.p_id, 1);
+                },
             },
             created: function () {
                 getUserBasic();
@@ -950,6 +1545,7 @@
                 getUserCompany();
                 getUserInterestLike();
                 getUserInterestDislike();
+                getPlateListByUId();
             }
         })
     </script>

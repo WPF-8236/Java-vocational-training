@@ -102,6 +102,24 @@ public class UserController {
 		return userService.getPlateListByUId(objectMapper.readValue(json, String.class));
 	}
 
+	@RequestMapping("/getPostListByUId")
+	@ResponseBody
+	public List<Post> getPostListByUId(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		json = request.getParameter("u_id");
+		return userService.getPostListByUId(objectMapper.readValue(json, String.class));
+	}
+
+	@RequestMapping("/getPostListByPPId")
+	@ResponseBody
+	public List<Post> getPostListByPPId(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		json = request.getParameter("p_id");
+		return userService.getPostListByPPId(objectMapper.readValue(json, String.class));
+	}
+
 
 	@RequestMapping("/putChangeUserBasic")
 	public void putChangeUserBasic(HttpServletResponse response, HttpServletRequest request) throws Exception {
@@ -300,6 +318,27 @@ public class UserController {
 		}
 	}
 
+	@RequestMapping("/addAPost")
+	public void addAPost(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		printWriter = response.getWriter();
+		json = request.getParameter("addPost");
+		Post post = objectMapper.readValue(json, Post.class);
+		post.setP_id(new Date().toLocaleString());
+		post.setP_time(new Date().toLocaleString());
+		post.setP_status(2);
+		if (userService.addAPost(post) != 0) {
+			json = objectMapper.writeValueAsString("添加成功");
+			printWriter.print(json);
+			printWriter.close();
+		} else {
+			json = objectMapper.writeValueAsString("添加失败！！");
+			printWriter.print(json);
+			printWriter.close();
+		}
+	}
+
 	@RequestMapping("/updateAPlate")
 	public void updateAPlate(HttpServletResponse response, HttpServletRequest request) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -309,6 +348,23 @@ public class UserController {
 		Plate plate = objectMapper.readValue(json, Plate.class);
 		plate.setP_status(2);
 		if (adminService.updateAPlate(plate) != 0) {
+			json = objectMapper.writeValueAsString("修改成功");
+			printWriter.print(json);
+			printWriter.close();
+		} else {
+			json = objectMapper.writeValueAsString("修改失败！！");
+			printWriter.print(json);
+			printWriter.close();
+		}
+	}
+
+	@RequestMapping("/updateAPost")
+	public void updateAPost(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		printWriter = response.getWriter();
+		json = request.getParameter("changePost");
+		if (userService.updateAPost(objectMapper.readValue(json, Post.class)) != 0) {
 			json = objectMapper.writeValueAsString("修改成功");
 			printWriter.print(json);
 			printWriter.close();

@@ -1,5 +1,3 @@
-<%@ page import="com.WPF.domain.UserGrade" %>
-<%@ page import="com.WPF.domain.UserBasic" %>
 <%
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
 %>

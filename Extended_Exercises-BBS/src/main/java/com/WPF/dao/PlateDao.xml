@@ -38,4 +38,14 @@
         from bbs_plate
         where p_u_id = #{u_id}
     </select>
+    <update id="updatePlatePPCount">
+        update bbs_plate
+        set p_p_count=(select count(*) from bbs_post where p_p_id = #{p_p_id})
+        where p_id = #{p_p_id}
+    </update>
+    <update id="updatePlatePCommentCount">
+        update bbs_plate
+        set p_comment_count=p_comment_count + 1
+        where p_id = (select p_p_id from bbs_post where p_id = #{c_comment_p_id})
+    </update>
 </mapper>

@@ -27,4 +27,8 @@ public interface AdminService {
 	int removePlate(String p_id);
 
 	int updateAPlate(Plate plate);
+
+	int removePost(String p_id);
+
+	int changePostStatus(String p_id, String tag);
 }

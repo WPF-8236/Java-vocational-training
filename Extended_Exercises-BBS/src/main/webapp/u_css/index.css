@@ -8,18 +8,13 @@
 }
 
 #index {
-    width: 380px;
-    height: 76px;
+    width: 1200px;
     display: inline-block;
     position: fixed;
-    top: 100px;
-    left: 1500px;
+    top: 200px;
+    left: 100px;
     margin: 16px;
     overflow: hidden;
-    background: transparent;
-    color: white;
-    font-size: 32px;
-    cursor: pointer;
 }
 
 
@@ -176,6 +171,7 @@
     top: 600px;
     left: 1500px;
 }
+
 .btn#btn-6 {
     position: fixed;
     top: 700px;
@@ -186,7 +182,7 @@
     display: none;
 }
 
-#title{
+#title {
     width: 500px;
     height: 76px;
     display: inline-block;
@@ -199,4 +195,94 @@
     color: white;
     font-size: 28px;
     cursor: pointer;
+}
+
+.el-main {
+    text-align: center;
+    width: 1200px;
+    height: 100%;
+}
+
+body > .el-container {
+    margin-bottom: 40px;
+}
+
+#index ul {
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+#index li {
+    margin-right: 5px;
+    width: 380px;
+    height: 110px;
+    float: left;
+    font-size: 18px;
+}
+
+#index li .el-card__body {
+    padding: 10px;
+}
+
+#index li .el-button {
+    padding: 2px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+a:focus {
+    text-decoration: none;
+}
+
+#el_card_title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+#el_card_ul {
+    margin: 0 auto;
+}
+
+#el_card_ul li {
+    margin-right: 7px;
+    width: 110px;
+    height: 50px;
+    float: left;
+    font-size: 18px;
+    padding-top: 8px;
+
+}
+
+.el-icon-s-order {
+    font-size: 25px;
+}
+
+.el-icon-s-comment {
+    font-size: 25px;
+}
+
+.el-button [class*=el-icon-] + span {
+    margin-left: 25px;
 }

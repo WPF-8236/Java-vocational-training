@@ -30,6 +30,9 @@ public class UserServiceImpl implements UserService {
 	@Resource
 	private PlateDao plateDao;
 
+	@Resource
+	private PostDao postDao;
+
 	@Override
 	public UserBasic getUserBasicByUId(String u_id) {
 		return userBasicDao.selectUserBasicByUId(u_id);
@@ -119,5 +122,25 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int addAPlate(Plate plate) {
 		return plateDao.insertAPlate(plate);
+	}
+
+	@Override
+	public List<Post> getPostListByUId(String u_id) {
+		return postDao.selectPostListByUId(u_id);
+	}
+
+	@Override
+	public int addAPost(Post post) {
+		return postDao.insertAPost(post) * plateDao.updatePlatePPCount(post.getP_p_id());
+	}
+
+	@Override
+	public int updateAPost(Post post) {
+		return postDao.updateAPost(post);
+	}
+
+	@Override
+	public List<Post> getPostListByPPId(String p_p_id) {
+		return postDao.selectPostListByPPId(p_p_id);
 	}
 }

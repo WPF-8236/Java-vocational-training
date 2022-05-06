@@ -120,6 +120,54 @@
                 })
             }
 
+            function getPostListByUId() {
+                $.ajax({
+                    url: "user/getPostListByUId",
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: "json",
+                    data: {"u_id": JSON.stringify(document.getElementById("u_id").textContent)},
+                    success: function (reps) {
+                        console.log(reps)
+                        app.postList = reps;
+                        app.postListPage.total = app.postList.length;
+                    },
+                    error: function () {
+                        alert('帖子列表获取失败');
+                    }
+                })
+            }
+
+            function getPlateListAll() {
+                $.ajax({
+                    url: "admin/getPlateList",
+                    contentType: 'application/json;charset=UTF-8',
+                    success: function (reps) {
+                        console.log(reps)
+                        app.plateListAll = reps;
+                    },
+                    error: function () {
+                        alert('板块列表获取失败');
+                    }
+                })
+            }
+
+            function getPostListByPPId(p_id) {
+                $.ajax({
+                    url: "user/getPostListByPPId",
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: "json",
+                    data: {"p_id": JSON.stringify(p_id)},
+                    success: function (reps) {
+                        console.log(reps)
+                        app.postListByPPId = reps;
+                        app.postListByPPIdPage.total = app.postListByPPId.length;
+                    },
+                    error: function () {
+                        alert('帖子列表获取失败');
+                    }
+                })
+            }
+
             function addAPlate() {
                 app.addPlate.p_u_id = document.getElementById("u_id").textContent;
                 console.log(app.addPlate);
@@ -136,6 +184,29 @@
                         app.itemKey = Math.random();
                         app.addPlateDrawer = false
                         app.addPlate = ''
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                })
+            }
+
+            function addAPost() {
+                app.addPost.p_u_id = document.getElementById("u_id").textContent;
+                console.log(app.addPost);
+                $.ajax({
+                    url: "user/addAPost",
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: "json",
+                    data: {
+                        "addPost": JSON.stringify(app.addPost),
+                    },
+                    success: function (reps) {
+                        alert(reps.valueOf());
+                        getPostListByUId();
+                        app.itemKey = Math.random();
+                        app.addPostDrawer = false
+                        app.addPost = ''
                     },
                     error: function () {
                         alert('error');
@@ -288,6 +359,28 @@
                 })
             }
 
+            function updateAPost() {
+                console.log(app.changePost)
+                $.ajax({
+                    url: "user/updateAPost",
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: "json",
+                    data: {
+                        "changePost": JSON.stringify(app.changePost)
+                    },
+                    success: function (reps) {
+                        alert(reps.valueOf());
+                        getPostListByUId();
+                        app.itemKey = Math.random();
+                        app.changePostDrawer = false
+                        app.changePost = ''
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                })
+            }
+
             function putUserPhone() {
                 console.log(app.changeUserBasic.u_phone)
                 $.ajax({
@@ -365,6 +458,26 @@
                 })
             }
 
+            function removePost(p_id) {
+                console.log(p_id)
+                $.ajax({
+                    url: "admin/removePost",
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: "json",
+                    data: {
+                        "p_id": JSON.stringify(p_id),
+                    },
+                    success: function (reps) {
+                        alert(reps.valueOf());
+                        getPostListByUId();
+                        app.itemKey = Math.random();
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                })
+            }
+
             function changePStatus(p_id, tag) {
                 $.ajax({
                     url: "admin/changePStatus",
@@ -377,6 +490,26 @@
                     success: function (reps) {
                         alert(reps.valueOf());
                         getPlateListByUId();
+                        app.itemKey = Math.random();
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                })
+            }
+
+            function changePostStatus(p_id, tag, p_p_id) {
+                $.ajax({
+                    url: "admin/changePostStatus",
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: "json",
+                    data: {
+                        "p_id": JSON.stringify(p_id),
+                        "tag": JSON.stringify(tag)
+                    },
+                    success: function (reps) {
+                        alert(reps.valueOf());
+                        getPostListByPPId(p_p_id);
                         app.itemKey = Math.random();
                     },
                     error: function () {
@@ -1054,13 +1187,204 @@
                                         <el-tab-pane label="帖子">
                                             <div id="post_manage">
                                                 <div id="addPost_addButton">
-                                                    <el-button type="primary" onclick="">添加帖子</el-button>
-                                                    <div id="addPost_addPanel">
-
-                                                    </div>
+                                                    <el-button type="primary" onclick="app.addPostDrawer=true">添加帖子
+                                                    </el-button>
+                                                </div>
+                                                <div id="addPost_addPanel">
+                                                    <el-drawer
+                                                            title="添加帖子"
+                                                            :visible.sync="addPostDrawer"
+                                                            :direction="direction">
+                                                        <div id="addPost_addPanel_drawer">
+                                                            <el-form :label-position="labelPosition"
+                                                                     label-width="100px"
+                                                                     :model="addPost">
+                                                                <el-form-item label="帖子标题">
+                                                                    <el-input v-model="addPost.p_title"
+                                                                              placeholder="请输入内容"></el-input>
+                                                                </el-form-item>
+                                                                <el-form-item label="帖子发布板块">
+                                                                    <el-select v-model="addPost.p_p_id"
+                                                                               placeholder="请选择">
+                                                                        <el-option
+                                                                                v-for="item in plateListAll"
+                                                                                :key="item.p_id"
+                                                                                :label="item.p_name"
+                                                                                :value="item.p_id"
+                                                                                :disabled="item.p_status==1 ? true : false">
+                                                                        </el-option>
+                                                                    </el-select>
+                                                                </el-form-item>
+                                                                <el-form-item label="帖子发布标签">
+                                                                    <el-radio-group v-model="addPost.p_tag">
+                                                                        <el-radio :label="0">原创</el-radio>
+                                                                        <el-radio :label="1">转载</el-radio>
+                                                                        <el-radio :label="2">翻译</el-radio>
+                                                                    </el-radio-group>
+                                                                </el-form-item>
+                                                                <el-form-item label="帖子内容">
+                                                                    <el-input type="textarea"
+                                                                              placeholder="请输入内容"
+                                                                              maxlength="1000"
+                                                                              show-word-limit
+                                                                              v-model="addPost.p_content"></el-input>
+                                                                </el-form-item>
+                                                                <el-button type="primary" @click="addAPost">添加帖子
+                                                                </el-button>
+                                                            </el-form>
+                                                        </div>
+                                                    </el-drawer>
                                                 </div>
                                                 <div id="post_list">
-
+                                                    <el-table
+                                                            ref="postList"
+                                                            :data="postList.slice((postListPage.currentPage-1)*postListPage.pageSize,postListPage.currentPage*postListPage.pageSize)"
+                                                            :key="itemKey">
+                                                        <el-table-column
+                                                                type="index"
+                                                                width="40">
+                                                        </el-table-column>
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="p_title"
+                                                                label="帖子名称"
+                                                                width="120">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="p_p_id"
+                                                                label="版块名称"
+                                                                width="100"
+                                                                :formatter="p_p_idFormatter">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="p_comment_count"
+                                                                label="帖子评论数目"
+                                                                width="110">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="p_browse_count"
+                                                                label="帖子浏览数目"
+                                                                width="110">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="p_thumbs_count"
+                                                                label="帖子点赞数目"
+                                                                width="110">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="p_time"
+                                                                label="帖子创建时间"
+                                                                width="140">
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="p_tag"
+                                                                label="帖子标签"
+                                                                width="80">
+                                                            <template slot-scope="scope">
+                                                                <el-tag>
+                                                                    {{scope.row.p_tag|tagFormatter}}
+                                                                </el-tag>
+                                                            </template>
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="p_nice"
+                                                                label="帖子价值"
+                                                                width="80">
+                                                            <template slot-scope="scope">
+                                                                <el-tag>
+                                                                    {{scope.row.p_nice|niceFormatter}}
+                                                                </el-tag>
+                                                            </template>
+                                                        </el-table-column>
+                                                        <el-table-column
+                                                                prop="p_status"
+                                                                label="帖子状态"
+                                                                width="90"
+                                                                :filters="[{ text: '正常', value: '0' }, { text: '封禁', value: '1' },{ text: '审核', value: '2' }]"
+                                                                :filter-method="plateListFilterPStatus"
+                                                                filter-placement="bottom-end">
+                                                            <template slot-scope="scope">
+                                                                <el-tag
+                                                                        :type="scope.row.p_status == '0' ? 'success' : 'danger'"
+                                                                        disable-transitions>
+                                                                    {{scope.row.p_status|statusFormatter}}
+                                                                </el-tag>
+                                                            </template>
+                                                        </el-table-column>
+                                                        <el-table-column label="操作">
+                                                            <template slot-scope="scope" width="100">
+                                                                <el-button
+                                                                        size="mini"
+                                                                        @click="app.changePostDrawer=true;app.changePost=scope.row">
+                                                                    编辑
+                                                                </el-button>
+                                                                <el-button
+                                                                        size="mini"
+                                                                        type="danger"
+                                                                        @click="removePost(scope.row.p_id)">删除
+                                                                </el-button>
+                                                                <el-button
+                                                                        size="mini"
+                                                                        @click="window.location.href='Message.jsp?p_id='+scope.row.p_id">
+                                                                    阅览
+                                                                </el-button>
+                                                            </template>
+                                                        </el-table-column>
+                                                    </el-table>
+                                                    <el-drawer
+                                                            title="修改帖子"
+                                                            :visible.sync="changePostDrawer"
+                                                            :direction="direction">
+                                                        <div id="post_list_drawer">
+                                                            <el-form :label-position="labelPosition"
+                                                                     label-width="100px"
+                                                                     :model="changePost">
+                                                                <el-form-item label="帖子标题">
+                                                                    <el-input v-model="changePost.p_title"
+                                                                              placeholder="请输入内容"></el-input>
+                                                                </el-form-item>
+                                                                <el-form-item label="帖子发布板块">
+                                                                    <el-select v-model="changePost.p_p_id"
+                                                                               placeholder="请选择">
+                                                                        <el-option
+                                                                                v-for="item in plateListAll"
+                                                                                :key="item.p_id"
+                                                                                :label="item.p_name"
+                                                                                :value="item.p_id"
+                                                                                :disabled="item.p_status==1 ? true : false">
+                                                                        </el-option>
+                                                                    </el-select>
+                                                                </el-form-item>
+                                                                <el-form-item label="帖子发布标签">
+                                                                    <el-radio-group v-model="changePost.p_tag">
+                                                                        <el-radio :label="0">原创</el-radio>
+                                                                        <el-radio :label="1">转载</el-radio>
+                                                                        <el-radio :label="2">翻译</el-radio>
+                                                                    </el-radio-group>
+                                                                </el-form-item>
+                                                                <el-form-item label="帖子内容">
+                                                                    <el-input type="textarea"
+                                                                              placeholder="请输入内容"
+                                                                              maxlength="1000"
+                                                                              show-word-limit
+                                                                              v-model="changePost.p_content"></el-input>
+                                                                </el-form-item>
+                                                                <el-button type="primary" @click="updateAPost">修改帖子
+                                                                </el-button>
+                                                            </el-form>
+                                                        </div>
+                                                    </el-drawer>
+                                                    <div class="block" style="margin-top:15px;">
+                                                        <el-pagination
+                                                                @size-change="handleSizeChange3"
+                                                                @current-change="handleCurrentChange3"
+                                                                :current-page.sync="postListPage.currentPage"
+                                                                :page-sizes="[5, 10, 15, 20, 25]"
+                                                                :page-size="postListPage.pageSize"
+                                                                layout="total, sizes, prev, pager, next, jumper"
+                                                                :total="postListPage.total">
+                                                        </el-pagination>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </el-tab-pane>
@@ -1178,6 +1502,11 @@
                                                                         type="danger"
                                                                         @click="removePlate(scope.row.p_id)">删除
                                                                 </el-button>
+                                                                <el-button
+                                                                        size="mini"
+                                                                        @click="app.checkPostDrawer=true;getPostListByPPId(scope.row.p_id)">
+                                                                    审核
+                                                                </el-button>
                                                             </template>
                                                         </el-table-column>
                                                     </el-table>
@@ -1202,6 +1531,148 @@
                                                                 <el-button type="primary" @click="updateAPlate">修改板块
                                                                 </el-button>
                                                             </el-form>
+                                                        </div>
+                                                    </el-drawer>
+                                                    <el-drawer
+                                                            title="审核帖子"
+                                                            :visible.sync="checkPostDrawer"
+                                                            :direction="direction"
+                                                            :size="1400">
+                                                        <div id="checkPost_list_drawer">
+                                                            <el-table
+                                                                    ref="postListByPPId"
+                                                                    :data="postListByPPId.slice((postListByPPIdPage.currentPage-1)*postListByPPIdPage.pageSize,postListByPPIdPage.currentPage*postListByPPIdPage.pageSize)"
+                                                                    :key="itemKey">
+                                                                <el-table-column
+                                                                        type="index"
+                                                                        width="40">
+                                                                </el-table-column>
+                                                                </el-table-column>
+                                                                <el-table-column
+                                                                        prop="p_title"
+                                                                        label="帖子名称"
+                                                                        width="120">
+                                                                </el-table-column>
+                                                                <el-table-column
+                                                                        prop="p_p_id"
+                                                                        label="版块名称"
+                                                                        width="100"
+                                                                        :formatter="p_p_idFormatter">
+                                                                </el-table-column>
+                                                                <el-table-column
+                                                                        prop="p_comment_count"
+                                                                        label="帖子评论数目"
+                                                                        width="110">
+                                                                </el-table-column>
+                                                                <el-table-column
+                                                                        prop="p_browse_count"
+                                                                        label="帖子浏览数目"
+                                                                        width="110">
+                                                                </el-table-column>
+                                                                <el-table-column
+                                                                        prop="p_thumbs_count"
+                                                                        label="帖子点赞数目"
+                                                                        width="110">
+                                                                </el-table-column>
+                                                                <el-table-column
+                                                                        prop="p_time"
+                                                                        label="帖子创建时间"
+                                                                        width="140">
+                                                                </el-table-column>
+                                                                <el-table-column
+                                                                        prop="p_tag"
+                                                                        label="帖子标签"
+                                                                        width="80">
+                                                                    <template slot-scope="scope">
+                                                                        <el-tag>
+                                                                            {{scope.row.p_tag|tagFormatter}}
+                                                                        </el-tag>
+                                                                    </template>
+                                                                </el-table-column>
+                                                                <el-table-column
+                                                                        prop="p_nice"
+                                                                        label="帖子价值"
+                                                                        width="80">
+                                                                    <template slot-scope="scope">
+                                                                        <el-tag>
+                                                                            {{scope.row.p_nice|niceFormatter}}
+                                                                        </el-tag>
+                                                                    </template>
+                                                                </el-table-column>
+                                                                <el-table-column
+                                                                        prop="p_status"
+                                                                        label="帖子状态"
+                                                                        width="90"
+                                                                        :filters="[{ text: '正常', value: '0' }, { text: '封禁', value: '1' },{ text: '审核', value: '2' }]"
+                                                                        :filter-method="plateListFilterPStatus"
+                                                                        filter-placement="bottom-end">
+                                                                    <template slot-scope="scope">
+                                                                        <el-tag
+                                                                                :type="scope.row.p_status == '0' ? 'success' : 'danger'"
+                                                                                disable-transitions>
+                                                                            {{scope.row.p_status|statusFormatter}}
+                                                                        </el-tag>
+                                                                    </template>
+                                                                </el-table-column>
+                                                                <el-table-column label="操作" width="200">
+                                                                    <template slot-scope="scope">
+                                                                        <div v-if="scope.row.p_status==2">
+                                                                            <el-button
+                                                                                    size="mini"
+                                                                                    @click="post_statusUnlock(scope.$index, scope.row)">
+                                                                                通过
+                                                                            </el-button>
+                                                                            <el-button
+                                                                                    size="mini"
+                                                                                    type="danger"
+                                                                                    @click="post_statusClock(scope.$index, scope.row)">
+                                                                                不通过
+                                                                            </el-button>
+                                                                        </div>
+                                                                        <div v-else>
+                                                                            <el-button
+                                                                                    v-if="scope.row.p_status==1"
+                                                                                    size="mini"
+                                                                                    @click="post_statusUnlock(scope.$index, scope.row)">
+                                                                                解禁
+                                                                            </el-button>
+                                                                            <el-button
+                                                                                    v-else-if="scope.row.p_status==0"
+                                                                                    size="mini"
+                                                                                    type="danger"
+                                                                                    @click="post_statusClock(scope.$index, scope.row)">
+                                                                                封禁
+                                                                            </el-button>
+                                                                        </div>
+                                                                    </template>
+                                                                </el-table-column>
+                                                                <el-table-column label="查看" width="200">
+                                                                    <template slot-scope="scope">
+                                                                        <el-button
+                                                                                size="mini"
+                                                                                type="danger"
+                                                                                @click="removePost(scope.row.p_id)">
+                                                                            删除
+                                                                        </el-button>
+                                                                        <el-button
+                                                                                size="mini"
+                                                                                @click="window.location.href='Message.jsp?p_id='+scope.row.p_id">
+                                                                            阅览
+                                                                        </el-button>
+                                                                    </template>
+                                                                </el-table-column>
+                                                            </el-table>
+                                                            <div class="block" style="margin-top:15px;">
+                                                                <el-pagination
+                                                                        @size-change="handleSizeChange4"
+                                                                        @current-change="handleCurrentChange4"
+                                                                        :current-page.sync="postListByPPIdPage.currentPage"
+                                                                        :page-sizes="[5, 10, 15, 20, 25]"
+                                                                        :page-size="postListByPPIdPage.pageSize"
+                                                                        layout="total, sizes, prev, pager, next, jumper"
+                                                                        :total="postListByPPIdPage.total">
+                                                                </el-pagination>
+                                                            </div>
                                                         </div>
                                                     </el-drawer>
                                                     <div class="block" style="margin-top:15px;">
@@ -1367,6 +1838,13 @@
                         p_p_id: '',
                         p_tag: '',
                     },
+                    changePost: {
+                        p_title: '',
+                        p_content: '',
+                        p_u_id: '',
+                        p_p_id: '',
+                        p_tag: '',
+                    },
                     addPlate: {
                         p_id: '',
                         p_name: '',
@@ -1384,7 +1862,30 @@
                         p_u_id: '',
                         p_status: '',
                     },],
+                    plateListAll: [{
+                        p_id: '',
+                        p_name: '',
+                        p_p_count: '',
+                        p_comment_count: '',
+                        p_description: '',
+                        p_u_id: '',
+                        p_status: '',
+                    },],
                     postList: [{
+                        p_id: '',
+                        p_title: '',
+                        p_content: '',
+                        p_comment_count: '',
+                        p_status: '',
+                        p_time: '',
+                        p_u_id: '',
+                        p_p_id: '',
+                        p_tag: '',
+                        p_nice: '',
+                        p_browse_count: '',
+                        p_thumbs_count: '',
+                    },],
+                    postListByPPId: [{
                         p_id: '',
                         p_title: '',
                         p_content: '',
@@ -1417,6 +1918,11 @@
                         total: '',
                         pageSize: 10,
                     },
+                    postListByPPIdPage: {
+                        currentPage: 1,
+                        total: '',
+                        pageSize: 10,
+                    },
                     direction: 'rtl',
                     drawer: false,
                     labelPosition: 'left',
@@ -1425,6 +1931,7 @@
                     addPostDrawer: false,
                     changePlateDrawer: false,
                     changePostDrawer: false,
+                    checkPostDrawer: false,
 
                 }
             },
@@ -1449,6 +1956,20 @@
                         return '封禁'
                     else
                         return '审核'
+                },
+                tagFormatter(value) {
+                    if (value == 0)
+                        return '原创'
+                    else if (value == 1)
+                        return '转载'
+                    else
+                        return '翻译'
+                },
+                niceFormatter(value) {
+                    if (value == 0)
+                        return '普通'
+                    else
+                        return '精华'
                 },
             },
             methods: {
@@ -1529,6 +2050,24 @@
                     console.log(`当前页: ${val}`);
                     this.plateListPage.currentPage = val;
                 },
+                handleSizeChange3(val) {
+                    console.log(`每页 ${val} 条`);
+                    this.postListPage.currentPage = 1;
+                    this.postListPage.pageSize = val;
+                },
+                handleCurrentChange3(val) {
+                    console.log(`当前页: ${val}`);
+                    this.postListPage.currentPage = val;
+                },
+                handleSizeChange4(val) {
+                    console.log(`每页 ${val} 条`);
+                    this.postListByPPIdPage.currentPage = 1;
+                    this.postListByPPIdPage.pageSize = val;
+                },
+                handleCurrentChange4(val) {
+                    console.log(`当前页: ${val}`);
+                    this.postListByPPIdPage.currentPage = val;
+                },
                 plateListFilterPStatus(value, row) {
                     return row.p_status == value;
                 },
@@ -1538,6 +2077,20 @@
                 p_statusClock(index, row) {
                     changePStatus(row.p_id, 1);
                 },
+                post_statusUnlock(index, row) {
+                    changePostStatus(row.p_id, 0, row.p_p_id);
+                },
+                post_statusClock(index, row) {
+                    changePostStatus(row.p_id, 1, row.p_p_id);
+                },
+                p_p_idFormatter(row, column) {
+                    for (let item of app.plateListAll) {
+                        if (row.p_p_id == item.p_id) {
+                            console.log(item)
+                            return item.p_name
+                        }
+                    }
+                },
             },
             created: function () {
                 getUserBasic();
@@ -1546,6 +2099,8 @@
                 getUserInterestLike();
                 getUserInterestDislike();
                 getPlateListByUId();
+                getPlateListAll();
+                getPostListByUId();
             }
         })
     </script>

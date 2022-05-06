@@ -5,11 +5,13 @@ import com.WPF.domain.Plate;
 import com.WPF.domain.UserList;
 import com.WPF.service.AdminService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class AdminServiceImpl implements AdminService {
 	@Resource
 	private UserListDao userListDao;
@@ -31,6 +33,9 @@ public class AdminServiceImpl implements AdminService {
 
 	@Resource
 	private UserGradeDao userGradeDao;
+
+	@Resource
+	private PostDao postDao;
 
 	@Override
 	public List<UserList> getUserList() {
@@ -90,5 +95,15 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int updateAPlate(Plate plate) {
 		return plateDao.updatePlate(plate);
+	}
+
+	@Override
+	public int removePost(String p_id) {
+		return postDao.deletePostByPId(p_id);
+	}
+
+	@Override
+	public int changePostStatus(String p_id, String tag) {
+		return postDao.updatePostStatus(p_id, tag);
 	}
 }

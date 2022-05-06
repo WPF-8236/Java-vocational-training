@@ -103,6 +103,24 @@ public class AdminController {
 		}
 	}
 
+	@RequestMapping("/changePostStatus")
+	public void changePostStatus(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		printWriter = response.getWriter();
+		String p_id = request.getParameter("p_id");
+		String tag = request.getParameter("tag");
+		if (adminService.changePostStatus(objectMapper.readValue(p_id, String.class), objectMapper.readValue(tag, String.class)) != 0) {
+			json = objectMapper.writeValueAsString("修改成功");
+			printWriter.print(json);
+			printWriter.close();
+		} else {
+			json = objectMapper.writeValueAsString("修改失败！！");
+			printWriter.print(json);
+			printWriter.close();
+		}
+	}
+
 	@RequestMapping("/updateAUser")
 	public void updateAUser(HttpServletResponse response, HttpServletRequest request) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -176,6 +194,23 @@ public class AdminController {
 		printWriter = response.getWriter();
 		json = request.getParameter("p_id");
 		if (adminService.removePlate(objectMapper.readValue(json, String.class)) != 0) {
+			json = objectMapper.writeValueAsString("删除成功");
+			printWriter.print(json);
+			printWriter.close();
+		} else {
+			json = objectMapper.writeValueAsString("删除失败！！");
+			printWriter.print(json);
+			printWriter.close();
+		}
+	}
+
+	@RequestMapping("/removePost")
+	public void removePost(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		printWriter = response.getWriter();
+		json = request.getParameter("p_id");
+		if (adminService.removePost(objectMapper.readValue(json, String.class)) != 0) {
 			json = objectMapper.writeValueAsString("删除成功");
 			printWriter.print(json);
 			printWriter.close();

@@ -1,5 +1,6 @@
 package com.WPF.dao;
 
+import com.WPF.domain.Comment;
 import com.WPF.domain.Plate;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,4 +18,8 @@ public interface PlateDao {
 	int updatePlate(Plate plate);
 
 	List<Plate> getPlateListByUId(@Param("u_id") String u_id);
+
+	int updatePlatePPCount(@Param("p_p_id") String p_p_id);
+
+	int updatePlatePCommentCount(Comment comment);
 }

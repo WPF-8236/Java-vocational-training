@@ -100,7 +100,7 @@ a:focus {
     color: #ffffff;
 }
 
-.el-select .el-input {
+#search .el-select .el-input {
     width: 130px;
 }
 
@@ -301,7 +301,7 @@ a:focus {
 #content_management {
     background: white;
     height: 100%;
-    width: 1200px;
+    width: 1300px;
     margin: 0 auto;
 }
 
@@ -331,11 +331,13 @@ a:focus {
     text-align: center;
 }
 
-#plate_list {
-    padding: 16px;
+#plate_list_drawer {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
 }
 
-#plate_list_drawer {
+#addPost_addPanel_drawer {
     width: 80%;
     margin: 0 auto;
     text-align: center;
@@ -344,4 +346,10 @@ a:focus {
 .block {
     width: 30%;
     margin: 0 auto;
+}
+
+#post_list_drawer {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
 }

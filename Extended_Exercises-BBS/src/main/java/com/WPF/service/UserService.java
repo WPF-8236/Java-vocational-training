@@ -36,4 +36,12 @@ public interface UserService {
 	List<Plate> getPlateListByUId(String u_id);
 
 	int addAPlate(Plate plate);
+
+	List<Post> getPostListByUId(String u_id);
+
+	int addAPost(Post post);
+
+	int updateAPost(Post post);
+
+	List<Post> getPostListByPPId(String p_p_id);
 }

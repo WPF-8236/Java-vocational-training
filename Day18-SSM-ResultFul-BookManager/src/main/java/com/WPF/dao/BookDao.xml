@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.WPF.dao.BookDao">
+    <select id="selectAllBook" resultType="Book">
+        select *
+        from books
+    </select>
+
+    <delete id="deleteBookByBookNo">
+        delete
+        from books
+        where book_no = #{book_no}
+    </delete>
+
+    <insert id="insertBook">
+        insert into books(book_no, sort_no, title, author, price, lo_no)
+        VALUES (#{book_no}, #{sort_no}, #{title}, #{author}, #{price}, #{lo_no})
+    </insert>
+
+    <update id="updateBook">
+        update books
+        set sort_no=#{sort_no},
+            title=#{title},
+            author=#{author},
+            price=#{price},
+            lo_no=#{lo_no}
+        where book_no = #{book_no}
+    </update>
+</mapper>

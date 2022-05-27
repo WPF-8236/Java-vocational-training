@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.WPF.dao.ClassRoomDao">
+    <resultMap id="ClassRoomStudent" type="ClassRoom">
+        <id property="c_id" column="c_id"/>
+        <result property="class_name" column="class_name"/>
+        <collection property="students" column="c_id" ofType="Student">
+            <id property="student_id" column="student_id"/>
+            <result property="class_id" column="class_id"/>
+            <result property="student_name" column="student_name"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectAllClassRoom" resultMap="ClassRoomStudent">
+        select c.*, s.*
+        from class c
+                 join student s on c_id = class_id
+    </select>
+</mapper>
